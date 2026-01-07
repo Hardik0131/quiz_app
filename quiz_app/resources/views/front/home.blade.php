@@ -1,45 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('front/layout/master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nothing</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/front/home.css'])
-    {{-- @vite(['resources/css/category.css']) --}}
-</head>
+@section('vite')
+    @vite('resources/css/front/home.css')
+@endsection
 
-<body>
-    <header>
-        <nav>
-            <div class="sub-nav-bar">
-                <ul>
-                    <li>
-                        <a href="{{ route('category.index') }}">Recents All</a>
-                    </li>
-                    @forelse ($categories as $category)
-                        <li>
-                            <a href="{{ route('category.post', $category->name) }}">{{ $category->name }}</a>
-                        </li>
-                    @empty
-                        <li>
-                            <a href="#">No Record Found</a>
-                        </li>
-                    @endforelse
-                </ul>
-            </div>
-        </nav>
-    </header>
+@section('content')
     <section>
         <div class="post_container">
+            <div class="trending">
+                <div class="side_column_text">
+                    <h2>Trending</h2>
+                </div>
+                @foreach ($posts as $index => $post)
+                    <div class="trending_posts">
+                        <div class="trending_post">
+                            <div class="trending_post_image">
+                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                            </div>
+                            <div class="trending_post_text">
+                                <div class="trending_post_count">
+                                    <h2>{{ $index + 1 }}</h2>
+                                </div>
+                                <div class="trending_post_category">
+                                    <p>{{ $post->category->name }}</p>
+                                    <h1>{{ $post->desc }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="category_posts">
+                <div class="category_post">
+                    @foreach ($posts as $post)
+                        <div class="post_card">
+                            <div class="category_post_image">
+                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                            </div>
+                            <div class="post_text">
+                                <div class="post_category">
+                                    {{ $post->category->name }}
+                                </div>
+                                <div class="category_post_text">
+                                    <h1>{{ $post->desc }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="most_tested">
+                <div class="side_column_text">
+                    <h2>Most Tested</h2>
+                </div>
+                <div class="tested_posts">
+                    @foreach ($posts as $post)
+                        <div class="most_tested_posts">
+                            <div class="tested_post_image">
+                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                            </div>
+                            <div class="tested_post_text">
+                                <div class="tested_post_category">
+                                    {{ $post->category->name }}
+                                </div>
+                                <div class="tested_post_text">
+                                    <h1>{{ $post->desc }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- <section>
+        <div class="post_container">
             @foreach ($posts as $post)
-                <a href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}" class="posts_count">
+                <a href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}"
+                    class="posts_count">
                     <div class="posts">
-                        <img src="{{ asset('/images/category/'.$post->image) }}" alt="img">
+                        <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
                         <h1>{{ $post->desc }}</h1>
                     </div>
                     <div class="time">
@@ -49,7 +89,5 @@
                 </a>
             @endforeach
         </div>
-    </section>
-</body>
-
-</html>
+    </section> --}}
+@endsection
