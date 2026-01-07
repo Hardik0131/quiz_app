@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: 'mont';
+    src: url('text/Montserrat.ttf');
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background-color: black;
+    color: white;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.main {
+    min-height: 100vh;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-bottom: 100px;
+}
+
+.category_form {
+    height: 85vh;
+    padding: 15px 35px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #cfdeff;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 8px 8px 16px rgba(255, 255, 255, 0.3);
+}
+
+.category_text {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0 0 15px 10px;
+}
+
+.form_control {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+}
+
+.form_control label {
+    padding-left: 2px;
+}
+
+.form_control input,
+.form_control textarea {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.category_submit {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category_submit a{
+    text-decoration: underline;
+    color: blue;
+}
+
+.category_submit button {
+    width: 25%;
+    background-color: rgb(40, 115, 255);
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin: 10px 0; */
+}
+
+.category_alert {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-warning {
+    background-color: #fbecb9;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.close {
+    cursor: pointer;
+}

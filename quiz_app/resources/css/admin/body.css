@@ -1,0 +1,169 @@
+.admin-sub-nav {
+    color: #11101d;
+    min-height: 100vh;
+    width: 100%;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    background-color: #e8edff;
+    /* background-color:  #f4f5fb; */
+}
+
+.sub-nav {
+    display: flex;
+    justify-content: space-between;
+    color: #11101d;
+    padding: 18px 25px;
+}
+
+.sub-nav .text {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.search-bar .search-box {
+    padding: 10px;
+    border: 2px solid rgb(124, 111, 111);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    align-items: center;
+}
+
+.search-box input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: inherit;
+}
+
+/* Do From There */
+
+.category-content {
+    padding: 25px;
+    border: none;
+    display: flex;
+    gap: 25px;
+}
+
+.category-content .search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.categories .newcategory button {
+    background-color: #1367ff;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    transition: all 0.5s ease;
+    width: max-content;
+}
+
+.newcategory button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* Do From There  */
+
+#categoryTable {
+    padding: 15px;
+    border: none;
+}
+
+#categoryTable .table {
+    max-width: 100%;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+}
+
+#categoryTable thead{
+    max-width: 100%;
+}
+
+#categoryTable tr th{
+    justify-content: space-around;
+}
+
+#categoryTable th {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 15px;
+    word-break: break-word;
+    justify-content: space-between;
+    flex-direction: row;
+    word-wrap: break-word;
+}
+
+#categoryTable tr:last-child td {
+    border-bottom: none;
+}
+
+#categoryTable .table tbody {
+    align-items: center;
+    text-align: center;
+}
+
+#categoryTable .table thead th {
+    padding: 15px;
+    text-align: start;
+}
+
+#categoryTable .table tbody td {
+    text-align: start;
+    min-width: 200px;
+}
+
+#categoryTable .table tbody td.action {
+    text-align: start;
+}
+
+#categoryTable th,
+td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+#categoryTable table tbody td i.bx-trash {
+    color: rgb(255, 11, 11);
+}
+
+#categoryTable table tbody td i.bx-trash:hover {
+    color: rgb(107, 3, 3);
+    text-decoration: underline;
+}
+
+#categoryTable table tbody td i.bx-edit {
+    color: blue;
+}
+
+#categoryTable table tbody td i.bx-show:hover {
+    color: rgb(0, 0, 68);
+    text-decoration: underline;
+}
+
+#categoryTable .action-buttons {
+    font-size: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: start;
+}
+
+th, td{
+    border-left: 1px solid #ccc;
+}
+
+td:first-child,
+th:first-child{
+    border-left: none;
+}

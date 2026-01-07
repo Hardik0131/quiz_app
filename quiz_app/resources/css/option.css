@@ -1,0 +1,63 @@
+.question_option {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.question_option .option {
+  float: left;
+  width: 45%;
+  /* width: 100px; */
+  border: 1px solid transparent;
+  height: 40px;
+  position: relative;
+  background-color: rgb(190, 255, 255);
+  margin: 10px;
+  border-radius: 5px;
+}
+
+/* .question_option li:hover,
+.question_option li:active{
+  background-color: aqua;
+  border: 1px solid darkseagreen;
+} */
+
+.question_option label,
+.question_option input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 0;
+  bottom: 0;
+}
+
+.question_option input[type="radio"] {
+  opacity: 0.01;
+  z-index: 100;
+}
+
+/* .question_option input[type="radio"]:checked+label,
+.Checked+label {
+  background: yellow;
+} */
+
+.question_option label {
+  padding: 5px;
+  /* border: 1px solid #CCC; */
+  cursor: pointer;
+  z-index: 90;
+}
+
+.question_option label:hover {
+  background: #DDD;
+}
+
+.question_option .option:hover,
+.question_option .option.active {
+  background-color: aqua;
+  border: 1px solid darkseagreen;
+}
