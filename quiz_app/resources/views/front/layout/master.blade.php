@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/nav.js', 'resources/css/layout/nav.css', 'resources/css/category.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/nav.js', 'resources/css/layout/nav.css', 'resources/css/category.css', 'resources/css/layout/footer.css'])
     @yield('vite')
 </head>
 
@@ -66,6 +66,7 @@
         </div>
     </header>
     @yield('content')
+    @include('front/layout/footer')
 </body>
 
 </html>
