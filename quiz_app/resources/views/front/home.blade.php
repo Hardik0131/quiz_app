@@ -12,7 +12,7 @@
                     <h2>Trending</h2>
                 </div>
                 @foreach ($posts as $index => $post)
-                    <div class="trending_posts">
+                    <a href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                         <div class="trending_post">
                             <div class="trending_post_image">
                                 <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
@@ -27,25 +27,28 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
             <div class="category_posts">
                 <div class="category_post">
                     @foreach ($posts as $post)
-                        <div class="post_card">
-                            <div class="category_post_image">
-                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
-                            </div>
-                            <div class="post_text">
-                                <div class="post_category">
-                                    {{ $post->category->name }}
+                        <a
+                            href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
+                            <div class="post_card">
+                                <div class="category_post_image">
+                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
                                 </div>
-                                <div class="category_post_text">
-                                    <h1>{{ $post->desc }}</h1>
+                                <div class="post_text">
+                                    <div class="post_category">
+                                        {{ $post->category->name }}
+                                    </div>
+                                    <div class="category_post_text">
+                                        <h1>{{ $post->desc }}</h1>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -55,19 +58,22 @@
                 </div>
                 <div class="tested_posts">
                     @foreach ($posts as $post)
-                        <div class="most_tested_posts">
-                            <div class="tested_post_image">
-                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
-                            </div>
-                            <div class="tested_post_text">
-                                <div class="tested_post_category">
-                                    {{ $post->category->name }}
+                        <a
+                            href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
+                            <div class="most_tested_posts">
+                                <div class="tested_post_image">
+                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
                                 </div>
                                 <div class="tested_post_text">
-                                    <h1>{{ $post->desc }}</h1>
+                                    <div class="tested_post_category">
+                                        {{ $post->category->name }}
+                                    </div>
+                                    <div class="tested_post_desc">
+                                        <h1>{{ $post->desc }}</h1>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

@@ -62,6 +62,11 @@ nav {
     font-weight: 500;
 }
 
+.nav_menu_icon li {
+    display: flex;
+    align-items: center;
+}
+
 .nav_item .nav_menu i {
     font-size: 30px;
     height: 100%;
@@ -86,12 +91,12 @@ nav {
     filter: drop-shadow(0 16px 16px darkblue);
 }
 
-.ri-whatsapp-line:hover{
+.ri-whatsapp-line:hover {
     color: #25D366;
     filter: drop-shadow(0 16px 16px darkgreen);
 }
 
-.ri-instagram-line:hover{
+.ri-instagram-line:hover {
     color: rgb(255, 99, 125);
     filter: drop-shadow(0 16px 16px darkred);
 }
@@ -118,7 +123,7 @@ nav {
     white-space: nowrap;
 }
 
-.sub-nav-bar ul::-webkit-scrollbar{
+.sub-nav-bar ul::-webkit-scrollbar {
     height: 6px;
     width: 10px;
     /* background-color: blue; */
@@ -137,6 +142,45 @@ nav {
 
 .sub-nav-bar ul::-webkit-scrollbar-thumb:hover {
     background: #000;
+}
+
+/* sidebar */
+
+.sidebar{
+    width: 200px;
+    background-color: brown;
+    position: fixed;
+    z-index: 99;
+    top: 80px;
+    right: -200px;
+    height: 100%;
+    text-align: center;
+}
+
+.sidebar.active{
+    right: 0;
+}
+
+.sidebar ul{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sidebar li{
+    transition: all 0.3s ease ;
+    text-align: start;
+}
+
+.sidebar li a{
+    padding: 20px 20px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar li:hover{
+    background-color: darkred;
 }
 
 @media (max-width:1320px) {
@@ -161,6 +205,10 @@ nav {
     }
 
     .nav_item ul.nav_menu {
+        display: none;
+    }
+
+    .sub-nav-bar {
         display: none;
     }
 }
