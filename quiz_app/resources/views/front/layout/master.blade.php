@@ -37,9 +37,9 @@
                 <li>
                     <a href="{{ route('category.index') }}">Recents All</a>
                 </li>
-                @forelse ($categories as $category)
+                @forelse ($categorys as $cat)
                     <li>
-                        <a href="{{ route('category.post', $category->name) }}">{{ $category->name }}</a>
+                        <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
                     </li>
                 @empty
                     <li>
@@ -53,9 +53,9 @@
                 <li>
                     <a href="{{ route('category.index') }}">Recents All</a>
                 </li>
-                @forelse ($categories as $category)
+                @forelse ($categorys as $cat)
                     <li>
-                        <a href="{{ route('category.post', $category->name) }}">{{ $category->name }}</a>
+                        <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
                     </li>
                 @empty
                     <li>
@@ -66,7 +66,7 @@
         </div>
     </header>
     @yield('content')
-    @include('front/layout/footer')
+    @include('front.layout.footer')
 </body>
 
 </html>
