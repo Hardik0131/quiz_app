@@ -130,6 +130,7 @@ html {
     border-radius: 10px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
     transition: all ease 0.3s;
+    cursor: pointer;
 }
 
 .question_submit:hover {
@@ -245,7 +246,7 @@ html {
 .most_liked_post_image img {
     object-fit: cover;
     width: 100%;
-    height: 110px;
+    height: 150px;
     transition: all 0.5s ease;
 }
 
@@ -355,6 +356,10 @@ html {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
+    }
+
+    .most_liked_post_image img {
+        height: 150px;
     }
 
     #category_title {

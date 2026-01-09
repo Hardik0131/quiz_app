@@ -62,6 +62,24 @@
                         <a href="#">No Record Found</a>
                     </li>
                 @endforelse
+                @forelse ($categorys as $cat)
+                    <li>
+                        <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
+                    </li>
+                @empty
+                    <li>
+                        <a href="#">No Record Found</a>
+                    </li>
+                @endforelse
+                @forelse ($categorys as $cat)
+                    <li>
+                        <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
+                    </li>
+                @empty
+                    <li>
+                        <a href="#">No Record Found</a>
+                    </li>
+                @endforelse
             </ul>
         </div>
     </header>

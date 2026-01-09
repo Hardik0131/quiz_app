@@ -62,6 +62,31 @@
                 </div>
             </form>
             <hr class="seprator">
+            <div class="most_liked">
+                <div class="bottom_column_text">
+                    <h2>Content Must You Like</h2>
+                </div>
+                <div class="most_like">
+                    @foreach ($posts as $post)
+                        <a
+                            href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
+                            <div class="most_liked_posts">
+                                <div class="most_liked_post_image">
+                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                                </div>
+                                <div class="most_like_text">
+                                    <div class="most_like_category">
+                                        {{ $post->category->name }}
+                                    </div>
+                                    <div class="most_like_desc">
+                                        <h1>{{ $post->desc }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
         </div>
         <div class="quiz_trending">
             <div class="quiz_side_column_text">
@@ -85,31 +110,6 @@
                     </div>
                 </a>
             @endforeach
-        </div>
-        <div class="most_liked">
-            <div class="bottom_column_text">
-                <h2>Content Must You Like</h2>
-            </div>
-            <div class="most_like">
-                @foreach ($posts as $post)
-                    <a
-                        href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
-                        <div class="most_liked_posts">
-                            <div class="most_liked_post_image">
-                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
-                            </div>
-                            <div class="most_like_text">
-                                <div class="most_like_category">
-                                    {{ $post->category->name }}
-                                </div>
-                                <div class="most_like_desc">
-                                    <h1>{{ $post->desc }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
         </div>
     </div>
 @endsection

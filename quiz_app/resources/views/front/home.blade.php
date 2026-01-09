@@ -1,7 +1,7 @@
 @extends('front.layout.master')
 
 @section('vite')
-    @vite(['resources/css/front/home.css'])
+    @vite(['resources/css/front/home.css', 'resources/css/front/home.css'])
 @endsection
 
 @section('content')

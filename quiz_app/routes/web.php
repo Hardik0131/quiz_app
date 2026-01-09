@@ -44,9 +44,4 @@ Route::get('/home', [CategoryController::class, 'index'])->name('category.index'
 Route::get('/home/{name}', [CategoryController::class, 'categoryPost'])->name('category.post');
 
 Route::get('category/{category_name}/post/{post_name}', [CategoryController::class, 'postQuestion'])->name('post.questions');
-
-Route::get('sidebar', function(){
-    return view('admin/category');
-});
-
 Route::get('/admin/category', [CategoryController::class, 'display'])->name('category.display');

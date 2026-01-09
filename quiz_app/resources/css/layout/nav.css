@@ -153,8 +153,27 @@ nav {
     z-index: 99;
     top: 80px;
     right: -200px;
-    height: 100%;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
     text-align: center;
+}
+
+.sidebar::-webkit-scrollbar{
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+    background: #4a0e0e;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background-color: #d48282;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+    background: #ffd6d6;
 }
 
 .sidebar.active{
