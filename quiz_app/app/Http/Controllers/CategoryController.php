@@ -13,9 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categorys = Category::all();
         $posts = Post::with('category')->get();
-        return view('front/home', compact('posts', 'categories'));
+        return view('front.home', compact('posts', 'categorys'));
     }
     
     
@@ -59,18 +59,19 @@ class CategoryController extends Controller
         $categories = Category::all();
         $category = Category::where('name', $name)->firstOrFail();
         $posts = Post::with('category')->where('category_id', $category->id)->get();
-        return view('front/home', compact('categories', 'posts', 'category'));
+        return view('front.home', compact('categories', 'posts', 'category'));
     }
 
     public function postQuestion($category_name, $post_name){
         $category_name = urldecode($category_name);
         $post_name = urldecode($post_name);
 
+        $posts = Post::all();
         $category = Category::where('name', $category_name)->firstOrFail();
         $post = Post::where('post_name', $post_name)->where('category_id', $category->id)->firstOrFail();
         $questions = $post->questions()->with('options')->get();
         
-        return view('front/quiz', compact('category', 'post', 'questions'));
+        return view('front.quiz', compact('category', 'posts', 'post', 'questions'));
     }
 
     /**
