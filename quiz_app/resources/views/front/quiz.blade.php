@@ -1,8 +1,8 @@
 @extends('front.layout.master')
 
 @section('vite')
-    @vite(['resources/css/quiz.css', 'resources/js/quiz.js', 'resources/css/front/home.css'])
-    @vite(['resources/css/option.css'])
+    @vite(['resources/css/front/quiz.css', 'resources/js/quiz.js', 'resources/css/front/home.css'])
+    @vite(['resources/css/layout/option.css'])
 @endsection
 
 @section('content')
