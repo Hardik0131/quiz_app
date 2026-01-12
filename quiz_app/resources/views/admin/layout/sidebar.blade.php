@@ -1,37 +1,46 @@
 <div class="sidebar">
     <div class="logo-details">
-        <div class="logo_name">Portfolio</div>
+        <div class="logo_name">Product</div>
         <i class="bx bx-menu" id="btn"></i>
     </div>
 
     <ul class="nav-list">
         <li>
-            <a href="#">
-                <i class="ri-apps-ai-line"></i>
+            <a href="{{ route('admin.category.display') }}"
+                class="{{ request()->routeIs('admin.category.display*') ? 'active' : '' }} sidebar-link"
+                data-url="{{ route('admin.category.display') }}">
+                <i class="ri-apps-line"></i>
                 <span class="links_name">Category</span>
             </a>
             <span class="tooltip">Category</span>
         </li>
         <li>
-            <a href="#">
-                <i class="ri-news-line"></i>
+            <a href="" class="sidebar-link" data-url="">
+                <i class="ri-file-list-line"></i>
                 <span class="links_name">Posts</span>
             </a>
             <span class="tooltip">Posts</span>
         </li>
         <li>
-            <a href="#">
-                <i class="ri-questionnaire-line"></i>
+            <a>
+                <i class="ri-question-line"></i>
                 <span class="links_name">Question</span>
             </a>
             <span class="tooltip">Question</span>
         </li>
         <li>
-            <a href="#">
+            <a>
+                <i class="ri-bar-chart-line"></i>
+                <span class="links_name">Result</span>
+            </a>
+            <span class="tooltip">Result</span>
+        </li>
+        {{-- <li>
+            <a href="#" class="sidebar-link">
                 <i class="ri-question-answer-line"></i>
                 <span class="links_name">Answer</span>
             </a>
             <span class="tooltip">Answer</span>
-        </li>
+        </li> --}}
     </ul>
 </div>

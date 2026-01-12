@@ -206,6 +206,7 @@ html.sidebar-open .sidebar~.home-section {
     border: 3px solid #fff;
     padding: 5px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .admin-nav .profile-detail {
@@ -222,6 +223,7 @@ html.sidebar-open .sidebar~.home-section {
     flex-direction: column;
     transition: all 0.6s ease;
     opacity: 0;
+    cursor: pointer;
 }
 
 .admin-nav .profile-detail li a {
@@ -244,5 +246,19 @@ html.sidebar-open .sidebar~.home-section {
     color: black;
     border: none;
     border-radius: 7px;
+    cursor: pointer;
 }
 
+.sidebar li a.active {
+    background: #4A44C4;
+    /* Highlight color from your image */
+}
+
+.sidebar li a.active i,
+.sidebar li a.active .links_name {
+    color: #fff;
+}
+
+.admin-nav .active {
+    opacity: 1;
+}

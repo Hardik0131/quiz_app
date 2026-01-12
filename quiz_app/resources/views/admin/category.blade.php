@@ -1,17 +1,15 @@
-@extends('layout/master')
-
-@section('content')
-    <div class="admin-sub-nav categorie">
-        <div class="categories sub-nav">
+<div class="category-admin-nav">
+    <div class="admin-sub-nav category">
+        <div class="category sub-nav">
             <div class="text">Category</div>
-            <div class="categories_link">
+            <div class="category_link">
                 <i class="bx bxs-info-circle"></i>
                 <a href="#">/ Category</a>
             </div>
         </div>
         <div class="category-content">
-            <div class="categories search-bar">
-                <div class="categories search-box">
+            <div class="category search-bar">
+                <div class="category search-box">
                     <input type="search" placeholder="Search here... " id="searchInput" class="category-search">
                     <i class="bx bx-search"></i>
                 </div>
@@ -36,31 +34,16 @@
                     </tr>
                 </thead>
                 <tbody id="categoryBody">
-                    @forelse ($categories as $category)
-                        <tr>
-                            <td>{{ $category->name ?: 'N/A' }}</td>
-                            <td>{{ $category->short_desc ?: 'N/A' }}</td>
-                            <td>{{ $category->long_desc ?: 'N/A' }}</td>
-                            <td class="action">
-                                <div class="action-buttons">
-                                    <div class="delete-btn">
-                                        <i class="bx bx-trash"></i>
-                                    </div>
-                                    <div class="edit-btn">
-                                        <i class="bx bx-edit"></i>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" style="text-align: center; padding:20px;">
-                                No Category Found
-                            </td>
-                        </tr>
-                    @endforelse
+                    @include('admin.layout.row')
+                    <tr>
+                        <td colspan="4">
+                            <div class="pagination-wrapper">
+                                @include('admin.layout.pagination')
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-@endsection
+</div>

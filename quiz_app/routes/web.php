@@ -44,4 +44,10 @@ Route::get('/home', [CategoryController::class, 'index'])->name('category.index'
 Route::get('/home/{name}', [CategoryController::class, 'categoryPost'])->name('category.post');
 
 Route::get('category/{category_name}/post/{post_name}', [CategoryController::class, 'postQuestion'])->name('post.questions');
-Route::get('/admin/category', [CategoryController::class, 'display'])->name('category.display');
+
+
+Route::get('/admin/category', [CategoryController::class, 'display'])->name('admin.category.display');
+
+Route::get('admin', function(){
+    return view('admin.layout.master');
+});

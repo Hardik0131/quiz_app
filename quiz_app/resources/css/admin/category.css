@@ -1,0 +1,76 @@
+.category-admin-nav{
+    background-color: white;
+    min-height: 100vh;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: black;
+    padding: 0 25px;
+    width: 100%;
+}
+.category-content{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-new-category button{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1367ff;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    text-wrap: nowrap;
+    color: white;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.add-new-category button:hover{
+    transform: translateY(-2px);
+}
+
+#categoryTable{
+    padding-top: 50px;
+    border: none;
+}
+
+.category_form{
+    width: 100%;
+    height: 100%;
+    padding: 50px 15px;
+}
+
+.add_category_text {
+    padding: 0 0 25px 0;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.status_badge.available{
+    font-weight: 600;
+    color: rgb(0, 146, 0);
+}
+
+.status_badge.booked{
+    font-weight: 600;
+    color: #b91c1c;
+}
+
+.status_badge.maintenance{
+    font-weight: 600;
+    color: #92400e;
+}
+
+.room_image img{
+    width: 150px;
+}
+
+td.action_btn{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
