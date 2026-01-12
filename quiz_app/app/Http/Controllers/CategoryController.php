@@ -19,11 +19,18 @@ class CategoryController extends Controller
     }
     
     
-    public function display()
+    public function display(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::latest()->paginate(10);
         $posts = Post::with('category')->get();
-        return view('admin/category', compact('posts', 'categories'));
+        
+        if($request->ajax()){
+            return view('admin.category', compact('categories', 'posts'));
+        }
+
+        return view('admin.layout.master', [
+            'content' => view('admin.category', compact('categories', 'posts')),
+        ]);
     }
 
     /**
@@ -73,6 +80,8 @@ class CategoryController extends Controller
         
         return view('front.quiz', compact('category', 'posts', 'post', 'questions'));
     }
+
+    // Admin Controller
 
     /**
      * Display the specified resource.
