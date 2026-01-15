@@ -1,0 +1,173 @@
+.post-admin-nav {
+    background-color: white;
+    min-height: 100vh;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: black;
+    padding: 0 25px;
+    width: 100%;
+}
+
+.post-content {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-new-post button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1367ff;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    text-wrap: nowrap;
+    color: white;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.add-new-post button:hover {
+    transform: translateY(-2px);
+}
+
+#postTable {
+    padding-top: 50px;
+    border: none;
+}
+
+.post_form {
+    width: 100%;
+    height: 100%;
+    padding: 50px 15px;
+}
+
+.add_post_text {
+    padding: 0 0 25px 0;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.update_post_text {
+    padding: 0 0 25px 0;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.status_badge.available {
+    font-weight: 600;
+    color: rgb(0, 146, 0);
+}
+
+.status_badge.booked {
+    font-weight: 600;
+    color: #b91c1c;
+}
+
+.status_badge.maintenance {
+    font-weight: 600;
+    color: #92400e;
+}
+
+.room_image img {
+    width: 150px;
+}
+
+td.action_btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* post form CSS */
+
+.post_text {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+#form {
+    background-color: transparent;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form_control {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form_control label {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.form_control input {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form_control textarea {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form_control input:focus {
+    outline: none;
+}
+
+.form_control input:focus-within {
+    border: #24634b;
+    box-shadow: 0 0 8px rgba(11, 94, 80, 0.7);
+    transition: 0.2s ease;
+}
+
+.post_alert {
+    width: 45%;
+    margin-bottom: 20px;
+    margin-left: -5px;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    background-color: #fbecb9;
+    padding: 10px 15px;
+    border-color: #ffeeba;
+    border-radius: 10px;
+    color: #856404;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    margin-left: -5px;
+    align-self: flex-start;
+    transition: all 0.5s ease;
+}
+
+.success {
+    display: flex;
+    align-items: center;
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+}
+
+.ri-close-line {
+    font-size: 19px;
+    cursor: pointer;
+}
