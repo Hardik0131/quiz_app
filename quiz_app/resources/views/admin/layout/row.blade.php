@@ -1,26 +1,27 @@
 @forelse ($categories as $category)
     <tr>
-        <td>
+        <td style="width: 20%">
             <div class="table_cell">{{ $category->name ?: 'N/A' }}</div>
         </td>
-        <td>
+        <td style="width: 35%">
             <div class="table_cell">
                 {{ $category->short_desc ?: 'N/A' }}
             </div>
-        </td>
+        </td style="width: 35%">
         <td>
             <div class="table_cell">
                 {{ $category->long_desc ?: 'N/A' }}
             </div>
         </td>
-        <td class="action">
+        <td class="action" style="width: 10%">
             <div class="action-buttons">
-                <div class="delete-btn">
+                <div class="delete-btn"  data-id="{{ $category->id }}">
                     <i class="bx bx-trash"></i>
                 </div>
-                <div class="edit-btn">
+                <a href="{{ route('admin.category.edit', $category) }}" class="category-edit"
+                    data-url="{{ route('admin.category.edit', $category) }}">
                     <i class="bx bx-edit"></i>
-                </div>
+                </a>
             </div>
         </td>
     </tr>
@@ -31,3 +32,11 @@
         </td>
     </tr>
 @endforelse
+
+<tr>
+    <td colspan="4">
+        <div class="pagination-wrapper">
+            @include('admin.layout.pagination')
+        </div>
+    </td>
+</tr>

@@ -7,7 +7,7 @@
     <ul class="nav-list">
         <li>
             <a href="{{ route('admin.category.display') }}"
-                class="{{ request()->routeIs('admin.category.display*') ? 'active' : '' }} sidebar-link"
+                class="{{ request()->routeIs('admin.category*') ? 'active' : '' }} sidebar-link"
                 data-url="{{ route('admin.category.display') }}">
                 <i class="ri-apps-line"></i>
                 <span class="links_name">Category</span>

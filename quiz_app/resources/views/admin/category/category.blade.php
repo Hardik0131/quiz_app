@@ -10,18 +10,24 @@
         <div class="category-content">
             <div class="category search-bar">
                 <div class="category search-box">
-                    <input type="search" placeholder="Search here... " id="searchInput" class="category-search">
+                    <input type="search" placeholder="Search here... " id="searchInput" class="category-search" autocomplete="off">
                     <i class="bx bx-search"></i>
                 </div>
                 <div class="add-new-category newcategory">
-                    <button>
-                        <i class="bx bx-plus"></i>
-                        <div class="add-category-text">
-                            Add Category
-                        </div>
-                    </button>
+                    <a href="{{ route('admin.category.addCategory') }}"
+                        data-url="{{ route('admin.category.addCategory') }}" class="add-category">
+                        <button>
+                            <i class="bx bx-plus"></i>
+                            <div class="add-category-text">
+                                Add Category
+                            </div>
+                        </button>
+                    </a>
                 </div>
             </div>
+        </div>
+        <div class="category-delete-alert">
+            
         </div>
         <div id="categoryTable">
             <table class="table">
@@ -35,13 +41,6 @@
                 </thead>
                 <tbody id="categoryBody">
                     @include('admin.layout.row')
-                    <tr>
-                        <td colspan="4">
-                            <div class="pagination-wrapper">
-                                @include('admin.layout.pagination')
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

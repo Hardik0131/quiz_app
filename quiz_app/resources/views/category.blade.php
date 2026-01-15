@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <div class="category_form">
     <div class="category_text">
         <h1>Create a Category</h1>

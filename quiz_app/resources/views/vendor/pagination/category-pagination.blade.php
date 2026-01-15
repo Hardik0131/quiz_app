@@ -5,9 +5,11 @@
             @if ($paginator->onFirstPage())
                 <li class="disabled">‹ Previous</li>
             @else
-                <li>
-                    <a href="{{ $paginator->previousPageUrl() }}">‹ Previous</a>
-                </li>
+                <a href="{{ $paginator->previousPageUrl() }}">
+                    <li>
+                        ‹ Previous
+                    </li>
+                </a>
             @endif
 
             {{-- Page Number --}}
@@ -20,9 +22,11 @@
                         @if ($page == $paginator->currentPage())
                             <li class="active">{{ $page }}</li>
                         @else
-                            <li>
-                                <a href="{{ $url }}">{{ $page }}</a>
-                            </li>
+                            <a href="{{ $url }}">
+                                <li>
+                                    {{ $page }}
+                                </li>
+                            </a>
                         @endif
                     @endforeach
                 @endif
@@ -31,9 +35,11 @@
             {{-- Next --}}
 
             @if ($paginator->hasMorePages())
-                <li>
-                    <a href="{{ $paginator->nextPageUrl() }}">Next ›</a>
-                </li>
+                <a href="{{ $paginator->nextPageUrl() }}">
+                    <li>
+                        Next ›
+                    </li>
+                </a>
             @else
                 <li class="disabled">Next ›</li>
             @endif

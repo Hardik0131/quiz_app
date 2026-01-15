@@ -94,9 +94,9 @@ $(document).ready(function () {
         });
     }
 
-    loadPage("click", ".add-rooms");
-    loadPage("click", ".edit-rooms");
-    loadPage("click", ".return-rooms");
+    loadPage("click", ".add-category");
+    loadPage("click", ".category-edit");
+    loadPage("click", ".back_to_category");
 
     loadPage("click", ".add-purchase");
     loadPage("click", ".edit-purchase");

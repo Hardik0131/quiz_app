@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <div id="page-loader"></div>
     @include('admin.layout.sidebar')
     <section class="home-section">
         <div class="admin-nav">

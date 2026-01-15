@@ -17,11 +17,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/result', function(){
 //     return view('result');
 // })->name('result.page');
+
+Route::prefix('v1')->group(function () {
+    Route::get('category/search', [CategoryController::class, 'search'])->name('admin.category.search');
+});
+
 Route::post('quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
 Route::get('quiz/result', [ResultController::class, 'result'])->name('quiz.result');
 
 Route::get('quiz/category/create', [CategoryController::class, 'create'])->name('category.create');
-Route::post('quiz/category/store', [CategoryController::class, 'store'])->name('category.store');
+
 
 Route::get('quiz/post/create', [PostController::class, 'create'])->name('post.create');
 Route::post('quiz/post/store', [PostController::class, 'store'])->name('post.store');
@@ -47,7 +52,12 @@ Route::get('category/{category_name}/post/{post_name}', [CategoryController::cla
 
 
 Route::get('/admin/category', [CategoryController::class, 'display'])->name('admin.category.display');
+Route::get('admin/addcategory', [CategoryController::class, 'addCategory'])->name('admin.category.addCategory');
+Route::post('admin/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+Route::get('/admin/category/edit/{category}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+Route::put('admin/category/update/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
+Route::delete('admin/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
-Route::get('admin', function(){
+Route::get('admin', function () {
     return view('admin.layout.master');
 });
