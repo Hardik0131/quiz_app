@@ -29,7 +29,6 @@ Route::get('quiz/category/create', [CategoryController::class, 'create'])->name(
 
 
 Route::get('quiz/post/create', [PostController::class, 'create'])->name('post.create');
-Route::post('quiz/post/store', [PostController::class, 'store'])->name('post.store');
 // Route::get('home', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('quiz/question/create', [QuestionController::class, 'create'])->name('question.create');
@@ -58,6 +57,12 @@ Route::get('/admin/category/edit/{category}', [CategoryController::class, 'edit'
 Route::put('admin/category/update/{category}', [CategoryController::class, 'update'])->name('admin.category.update');
 Route::delete('admin/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
-Route::get('admin', function () {
-    return view('admin.layout.master');
-});
+
+// for a Posts 
+
+Route::get('admin/posts', [PostController::class, 'displayPost'])->name('admin.post.display');
+Route::get('admin/addpost', [PostController::class, 'addPost'])->name('admin.post.addPost');
+Route::post('admin/posts/store', [PostController::class, 'store'])->name('admin.post.store');
+Route::get('admin/posts/edit/{post}', [PostController::class, 'edit'])->name('admin.post.edit');
+Route::put('admin/posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
+Route::delete('admin/posts/delete/{post}', [PostController::class, 'destroy'])->name('admin.post.delete');
