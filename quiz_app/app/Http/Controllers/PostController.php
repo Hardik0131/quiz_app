@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -20,10 +21,23 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+
+    // public function create()
+    // {
+    //     return view('posts', compact('categories'));
+    // }
+
+    public function addPost(Request $request)
     {
         $categories = Category::all();
-        return view('posts', compact('categories'));
+
+        if ($request->ajax()) {
+            return view('admin.post.addPost', compact('categories'));
+        }
+
+        return view('admin.layout.master', [
+            'content' => view('admin.post.addPost', compact('categories')),
+        ]);
     }
 
     /**
@@ -34,19 +48,14 @@ class PostController extends Controller
         $request->validate([
             'post_name' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required',
+            'image' => 'required|image',
             'desc' => 'required',
         ]);
 
         $filename = null;
 
-        if($request->has('image')){
-            $file = $request->file('image');
-            $extention = $file->getClientOriginalExtension();
-
-            $path = 'images/category';
-            $filename = time().'.'. $extention;
-            $file->move($path, $filename);
+        if ($request->has('image')) {
+            $filename = $request->file('image')->store('post', 'public');
         }
 
         Post::create([
@@ -59,7 +68,27 @@ class PostController extends Controller
         return back()->with('success', 'Post Create Succesfully.');
     }
 
-    
+    public function displayPost(Request $request)
+    {
+        $posts = Post::query()
+            ->when($request->search, function ($q) use ($request) {
+                $q->where('post_name', 'like', "%{$request->search}%")
+                    ->orWhere('desc', 'like', "%{$request->search}%");
+            })
+            ->orderBy('id', 'desc')->paginate(5);
+
+        if ($request->ajax() && $request->has('page')) {
+            return view('admin.layout.row', compact('posts'))->render();
+        }
+
+        if ($request->ajax()) {
+            return view('admin.post.post', compact('posts'));
+        }
+
+        return view('admin.layout.master', [
+            'content' => view('admin.post.post', compact('posts')),
+        ], compact('posts'));
+    }
 
     /**
      * Display the specified resource.
@@ -72,9 +101,17 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(post $post)
+    public function edit(Request $request, post $post)
     {
-        //
+        $categories = Category::all();
+
+        if ($request->ajax()) {
+            return view('admin.post.edit', compact('post', 'categories'));
+        }
+
+        return view('admin.layout.master', [
+            'content' => view('admin.post.edit', compact('post', 'categories')),
+        ]);
     }
 
     /**
@@ -82,7 +119,31 @@ class PostController extends Controller
      */
     public function update(Request $request, post $post)
     {
-        //
+        $request->validate([
+            'post_name' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable',
+            'desc' => 'required',
+        ]);
+
+        $filename = $post->image;
+
+        if ($request->has('image')) {
+            if ($post->image && Storage::disk('public')->exists($post->image)) {
+                Storage::disk('public')->delete($post->image);
+            }
+
+            $filename = $request->file('image')->store('post', 'public');
+        }
+
+        $post->update([
+            'post_name' => $request->post_name,
+            'category_id' => $request->category_id,
+            'image' => $filename,
+            'desc' => $request->desc,
+        ]);
+
+        return redirect()->route('admin.post.display')->with('success', 'Post Update SuccessFully.');
     }
 
     /**
@@ -90,6 +151,20 @@ class PostController extends Controller
      */
     public function destroy(post $post)
     {
-        //
+        $post = Post::findOrFail($post->id);
+
+        try{
+            $post->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Post Delete Successfully',
+            ]);
+        }catch (\Throwable $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
