@@ -1,3 +1,78 @@
+export function showAlert(type, message, url) {
+    const alertClass = type === "success" ? "alert-success" : "alert-warning";
+
+    $(url)
+        .html(
+            `
+                <div class="alert ${alertClass}">
+                    <div class="${alertClass}-message">
+                        <strong>${
+                            type === "success" ? "Success!" : "Error!"
+                        }</strong> ${message}
+                    </div>
+                    <button class="close"><i class="bx bx-x"></i></button>
+                </div>
+            `
+        )
+        .fadeIn(200);
+}
+
+export function loadPagination(page = 1, location, url) {
+    let search = $("#searchInput").val();
+
+    $(location).html(`
+            <tr>
+                <td colspan="4" style="text-align:center; padding:20px;">
+                    Loading...
+                </td>
+            </tr>
+        `);
+
+    $.ajax({
+        url: url,
+        data: {
+            page: page,
+            search: search,
+        },
+        success: function (html) {
+            $(location).html(html);
+        },
+    });
+}
+
+export function deleteThing(event, eLocation, url, alertUrl) {
+    $(document).on(event, eLocation, function () {
+        let thingId = $(this).data("id");
+        let row = $(this).closest("tr");
+
+        if (!confirm("Are you sure to delete this rooms Item ?")) return;
+
+        $.ajax({
+            url: url + thingId,
+            type: "DELETE",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log('Hardik');
+                if (response.status === "success") {
+                    row.fadeOut(400, function () {
+                        $(this).remove();
+                    });
+                    showAlert("success", response.message, alertUrl);
+                } else {
+                    console.log("Bhaliya");
+                    showAlert("error", response.message, alertUrl);
+                }
+            },
+            error: function () {
+                console.log(thingId);
+                showAlert("error", "Something went wrong!", alertUrl);
+            },
+        });
+    });
+}
+
 $(document).ready(function () {
     $(".profile-icon").click(function (event) {
         event.stopPropagation();
@@ -41,7 +116,7 @@ $(document).ready(function () {
     //             if (response.data.length > 0) {
     //                 $.each(response.data, function (index, category) {
     //                     rows += `
-    //                          <tr> 
+    //                          <tr>
     //                             <td>${category.name}</td>
     //                             <td>${category.short_desc}</td>
     //                             <td>${category.long_desc}</td>

@@ -13,7 +13,7 @@
                             {{ $error }}
                         </div>
                         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-                            <i class="ri-close-line"></i>
+                            <i class="bx bx-x"></i>
                         </button>
                     </div>
                 @endforeach
@@ -24,7 +24,7 @@
                         {{ session('success') }}
                     </div>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="ri-close-line"></i>
+                        <i class="bx bx-x"></i>
                     </button>
                 </div>
             @endif
@@ -43,9 +43,9 @@
                 <label for="long_desc">Long Description</label>
                 <textarea name="long_desc" id="long_desc" cols="10" rows="5" placeholder="Long Description Here..."></textarea>
             </div>
-            <div class="category_update">
+            <div class="submit_btn">
                 <button type="submit">Submit</button>
-                <a href="{{ route('admin.category.display') }}" data-url="{{ route('admin.category.display') }}" class="back_to_category">Back to Home?</a>
+                <a href="{{ route('admin.category.display') }}" data-url="{{ route('admin.category.display') }}" class="back_to_category">Back to Category?</a>
             </div>
         </form>
     </div>

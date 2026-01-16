@@ -15,7 +15,7 @@
                     <a href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                         <div class="trending_post">
                             <div class="trending_post_image">
-                                <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="img">
                             </div>
                             <div class="trending_post_text">
                                 <div class="trending_post_count">
@@ -37,7 +37,7 @@
                             href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                             <div class="post_card">
                                 <div class="category_post_image">
-                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt="img">
                                 </div>
                                 <div class="post_text">
                                     <div class="post_category">
@@ -62,7 +62,7 @@
                             href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                             <div class="most_tested_posts">
                                 <div class="tested_post_image">
-                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt="img">
                                 </div>
                                 <div class="tested_post_text">
                                     <div class="tested_post_category">

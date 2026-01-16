@@ -98,9 +98,9 @@ $(document).ready(function () {
     loadPage("click", ".category-edit");
     loadPage("click", ".back_to_category");
 
-    loadPage("click", ".add-purchase");
+    loadPage("click", ".add-post");
     loadPage("click", ".edit-purchase");
-    loadPage("click", ".return-purchase");
+    loadPage("click", ".back_to_post");
 
     loadPage("click", ".add-sells");
     loadPage("click", ".return-sells");

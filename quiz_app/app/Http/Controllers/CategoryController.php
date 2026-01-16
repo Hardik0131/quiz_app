@@ -20,15 +20,14 @@ class CategoryController extends Controller
         return view('front.home', compact('posts', 'categorys'));
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('category');
-    }
+    
+    // public function create()
+    // {
+    //     return view('category');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -98,7 +97,7 @@ class CategoryController extends Controller
 
     public function display(Request $request)
     {
-        $posts = Post::with('category')->get();
+        // $posts = Post::with('category')->get();
 
         $categories = Category::query()
             ->when($request->search, function ($q) use ($request) {
@@ -118,7 +117,7 @@ class CategoryController extends Controller
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.category.category', compact('categories', 'posts')),
+            'content' => view('admin.category.category', compact('categories')),
         ]);
     }
 

@@ -171,3 +171,10 @@ td.action_btn {
     font-size: 19px;
     cursor: pointer;
 }
+
+/* Table Code  */
+
+.table_cell img{
+    object-fit: cover;
+    height: 100px;
+}

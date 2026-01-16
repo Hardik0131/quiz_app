@@ -130,14 +130,14 @@ td.action_btn {
     transition: 0.2s ease;
 }
 
-.category_update {
+.submit_btn {
     margin-top: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.category_update button {
+.submit_btn button {
     background-color: #1367ff;
     color: white;
     padding: 10px;
@@ -145,7 +145,7 @@ td.action_btn {
     cursor: pointer;
 }
 
-.category_update button {
+.submit_btn button {
     background-color: #1367ff;
     color: white;
     padding: 10px;
@@ -153,7 +153,7 @@ td.action_btn {
     cursor: pointer;
 }
 
-.category_update a {
+.submit_btn a {
     color: #1367ff;
     text-decoration: underline;
 }
