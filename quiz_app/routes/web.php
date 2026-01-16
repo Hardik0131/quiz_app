@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ResultController;
+use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -66,3 +67,12 @@ Route::post('admin/posts/store', [PostController::class, 'store'])->name('admin.
 Route::get('admin/posts/edit/{post}', [PostController::class, 'edit'])->name('admin.post.edit');
 Route::put('admin/posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
 Route::delete('admin/posts/delete/{post}', [PostController::class, 'destroy'])->name('admin.post.delete');
+
+// for a questions
+
+Route::get('admin/questions', [QuestionController::class, 'displayQuestion'])->name('admin.question.display');
+Route::get('admin/addQuestion', [QuestionController::class, 'addQuestion'])->name('admin.question.addQuestion');
+Route::post('admin/questions/store', [QuestionController::class, 'store'])->name('admin.question.store');
+Route::get('admin/questions/edit/{question}', [QuestionController::class, 'edit'])->name('admin.question.edit');
+Route::put('admin/questions/update/{question}', [QuestionController::class, 'update'])->name('admin.question.update');
+Route::delete('admin/questions/delete/{question}', [QuestionController::class, 'destroy'])->name('admin.question.delete');

@@ -15,14 +15,18 @@
             <span class="tooltip">Category</span>
         </li>
         <li>
-            <a href="{{ route('admin.post.display') }}" class="{{ request()->routeIs('admin.post*') ? 'active' : '' }} sidebar-link" data-url="{{ route('admin.post.display') }}">
+            <a href="{{ route('admin.post.display') }}"
+                class="{{ request()->routeIs('admin.post*') ? 'active' : '' }} sidebar-link"
+                data-url="{{ route('admin.post.display') }}">
                 <i class="ri-file-list-line"></i>
                 <span class="links_name">Posts</span>
             </a>
             <span class="tooltip">Posts</span>
         </li>
         <li>
-            <a>
+            <a href="{{ route('admin.question.display') }}"
+                class="{{ request()->routeIs('admin.question*') ? 'active' : '' }} sidebar-link"
+                data-url="{{ route('admin.question.display') }}">
                 <i class="ri-question-line"></i>
                 <span class="links_name">Question</span>
             </a>

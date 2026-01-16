@@ -26,7 +26,7 @@
                                         <span>{{ $questions->count() }}</span></span></h3>
                             </div>
                             <div class="image_container">
-                                <img src="{{ asset('images/question/' . $question->image) }}" alt="img">
+                                <img src="{{ asset('storage/' . $question->image) }}" alt="img">
                             </div>
                             <div class="question">
                                 <h1>{{ $question->question }}</h1>
@@ -72,7 +72,7 @@
                             href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                             <div class="most_liked_posts">
                                 <div class="most_liked_post_image">
-                                    <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt="img">
                                 </div>
                                 <div class="most_like_text">
                                     <div class="most_like_category">
@@ -96,7 +96,7 @@
                 <a href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
                     <div class="quiz_trending_post">
                         <div class="quiz_trending_post_image">
-                            <img src="{{ asset('/images/category/' . $post->image) }}" alt="img">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="img">
                         </div>
                         <div class="quiz_trending_post_text">
                             <div class="quiz_trending_post_count">

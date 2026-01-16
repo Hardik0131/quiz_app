@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/sidebar.js', 'resources/css/admin/layout/sidebar.css', 'resources/js/admin/master.js', 'resources/css/admin/layout/master.css', 'resources/css/admin/category.css', 'resources/js/admin/category.js', 'resources/css/admin/post.css', 'resources/js/admin/posts.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/sidebar.js', 'resources/css/admin/layout/sidebar.css', 'resources/js/admin/master.js', 'resources/css/admin/layout/master.css', 'resources/css/admin/category.css', 'resources/js/admin/category.js', 'resources/css/admin/post.css', 'resources/js/admin/posts.js', 'resources/css/admin/question.css', 'resources/js/admin/question.js'])
 </head>
 
 <body>
