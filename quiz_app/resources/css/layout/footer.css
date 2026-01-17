@@ -8,9 +8,11 @@
 .footer_logo{
     height: 150px;
     width: 150px;
+    display: flex;
+    align-items: center;
 }
 
-.footer_logo{
+.footer_logo img{
     object-fit: cover;
 }
 
