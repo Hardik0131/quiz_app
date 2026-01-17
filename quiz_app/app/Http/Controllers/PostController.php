@@ -167,4 +167,15 @@ class PostController extends Controller
             ], 500);
         }
     }
+
+    public function getPostByCategory(Request $request){
+        if($request->category_id){
+            return Post::where('category_id', $request->category_id)
+                ->select('id', 'post_name')
+                ->orderBy('post_name')
+                ->get();
+        }
+
+        return Post::select('id', 'post_name')->get(); 
+    }
 }
