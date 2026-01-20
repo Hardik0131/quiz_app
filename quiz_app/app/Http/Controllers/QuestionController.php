@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -35,22 +36,28 @@ class QuestionController extends Controller
     public function addQuestion(Request $request)
     {
         $posts = Post::all();
+        $categories = Category::all();
 
         if ($request->ajax()) {
-            return view('admin.post.addQuestion', compact('posts'));
+            return view('admin.question.addQuestion', compact('posts', 'categories'));
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.question.addQuestion', compact('posts')),
+            'content' => view('admin.question.addQuestion', compact('posts', 'categories')),
         ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'question' => 'required',
+            'category_id' => 'required|exists:categories,id',
             'post_id' => 'required|exists:posts,id',
+            'question' => 'required',
             'image' => 'required',
+            'option_a' => 'required',
+            'option_b' => 'required',
+            'option_c' => 'required',
+            'option_d' => 'required',
             'desc' => 'nullable',
         ]);
 
@@ -62,8 +69,13 @@ class QuestionController extends Controller
 
         Question::create([
             'question' => $request->question,
+            'category_id' => $request->category_id,
             'post_id' => $request->post_id,
             'image' => $filename,
+            'option_a' => $request->option_a,
+            'option_b' => $request->option_b,
+            'option_c' => $request->option_c,
+            'option_d' => $request->option_d,
             'desc' => $request->desc,
         ]);
 
@@ -80,6 +92,8 @@ class QuestionController extends Controller
 
     public function displayQuestion(Request $request)
     {
+        $categories = Category::all();
+
         $questions = Question::query()
             ->when($request->search, function ($q) use ($request) {
                 $q->where('question', 'like', "%{$request->search}%")
@@ -87,15 +101,15 @@ class QuestionController extends Controller
             })->orderBy('id', 'desc')->paginate(5);
 
         if ($request->ajax() && $request->has('page')) {
-            return view('admin.layout.row', compact('questions'))->render();
+            return view('admin.layout.row', compact('questions', 'categories'))->render();
         }
 
         if ($request->ajax()) {
-            return view('admin.question.question', compact('questions'));
+            return view('admin.question.question', compact('questions', 'categories'));
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.question.question', compact('questions')),
+            'content' => view('admin.question.question', compact('questions', 'categories')),
         ]);
     }
 
@@ -104,14 +118,17 @@ class QuestionController extends Controller
      */
     public function edit(Request $request, Question $question)
     {
-        $posts = Post::all();
+        $categories = Category::orderBy('name')->get();
+        $posts = Post::where('category_id', $request->category_id)
+                    ->select('id', 'post_name')
+                    ->get();
 
         if ($request->ajax()) {
-            return view('admin.question.edit', compact('posts', 'question'));
+            return view('admin.question.edit', compact('posts', 'question', 'categories'));
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.question.edit', compact('posts', 'question')),
+            'content' => view('admin.question.edit', compact('posts', 'question', 'categories')),
         ]);
     }
 
@@ -124,6 +141,10 @@ class QuestionController extends Controller
             'question' => 'required',
             'post_id' => 'required|exists:posts,id',
             'image' => 'nullable',
+            'option_a' => 'required',
+            'option_b' => 'required',
+            'option_c' => 'required',
+            'option_d' => 'required',
             'desc' => 'nullable',
         ]);
 
@@ -141,6 +162,10 @@ class QuestionController extends Controller
             'question' => $request->question,
             'post_id' => $request->post_id,
             'image' => $filename,
+            'option_a' => $request->option_a,
+            'option_b' => $request->option_b,
+            'option_c' => $request->option_c,
+            'option_d' => $request->option_d,
             'desc' => $request->desc,
         ]);
 
@@ -154,18 +179,25 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($question->id);
 
-        try{
+        try {
             $question->delete();
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Question Delete Successfully',
             ]);
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
         }
     }
+
+    // public function getQuestionByCategoryAndPost(Request $request){
+    //     return Question::whereHas('post', function ($q) use ($request){
+    //         $q->where('id', $request->post_id)
+    //             ->orWhere('category_id', $request->category_id);
+    //     })->select('id', 'question')->get();
+    // }
 }
