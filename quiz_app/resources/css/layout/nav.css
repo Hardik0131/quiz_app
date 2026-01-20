@@ -7,7 +7,7 @@ body {
     padding-top: 40px;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     width: 0;
 }
 
@@ -18,7 +18,7 @@ nav {
     top: 0px;
     width: 100%;
     height: 80px;
-    background-color: #000000;
+    background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,7 +34,7 @@ nav {
 }
 
 .web_logo img {
-    width: 70px;
+    width: 120px;
 }
 
 .nav_item {
@@ -92,52 +92,52 @@ nav {
     filter: drop-shadow(0 16px 16px darkred);
 }
 
-/* Sub Nav Bar */
+/* Category Nav Bar */
 
-.sub-nav-bar {
+.category_nav {
     display: flex;
-    background-color: rgb(255, 204, 157);
+    /* background-color: rgb(255, 204, 157); */
 }
 
-.sub-nav-bar ul {
+.category_nav ul {
     width: 100%;
-    color: black;
+    color: #fffaf5;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 50px;
     padding: 15px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
 
-.sub-nav-bar ul::-webkit-scrollbar {
+.category_nav ul::-webkit-scrollbar {
     height: 6px;
     width: 10px;
     /* background-color: blue; */
     cursor: pointer;
 }
 
-.sub-nav-bar ul::-webkit-scrollbar-track {
+.category_nav ul::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.sub-nav-bar ul::-webkit-scrollbar-thumb {
+.category_nav ul::-webkit-scrollbar-thumb {
     background: #999;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.sub-nav-bar ul::-webkit-scrollbar-thumb:hover {
+.category_nav ul::-webkit-scrollbar-thumb:hover {
     background: #000;
 }
 
 /* sidebar */
 
-.sidebar{
+.sidebar {
     width: 200px;
     background-color: brown;
     position: fixed;
@@ -149,47 +149,47 @@ nav {
     text-align: center;
 }
 
-.sidebar::-webkit-scrollbar{
+.sidebar::-webkit-scrollbar {
     width: 6px;
 }
 
-.sidebar::-webkit-scrollbar-track{
+.sidebar::-webkit-scrollbar-track {
     background: #4a0e0e;
 }
 
-.sidebar::-webkit-scrollbar-thumb{
+.sidebar::-webkit-scrollbar-thumb {
     background-color: #d48282;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover{
+.sidebar::-webkit-scrollbar-thumb:hover {
     background: #ffd6d6;
 }
 
-.sidebar.active{
+.sidebar.active {
     right: 0;
 }
 
-.sidebar ul{
+.sidebar ul {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.sidebar li{
-    transition: all 0.3s ease ;
+.sidebar li {
+    transition: all 0.3s ease;
     text-align: start;
 }
 
-.sidebar li a{
+.sidebar li a {
     padding: 20px 20px;
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.sidebar li:hover{
+.sidebar li:hover {
     background-color: darkred;
 }
 
@@ -197,6 +197,20 @@ nav {
     .nav_item ul {
         gap: 25px;
         padding-right: 20px;
+    }
+}
+
+@media (max-width:1250px) {
+    .nav_item .nav_menu_icon .ri-menu-3-line {
+        display: block;
+    }
+
+    .nav_item ul.nav_menu {
+        display: none;
+    }
+
+    .category_nav{
+        display: none;
     }
 }
 
@@ -208,14 +222,6 @@ nav {
 
     .nav_item ul {
         padding-right: 30px;
-    }
-
-    .nav_item .nav_menu_icon .ri-menu-3-line {
-        display: block;
-    }
-
-    .nav_item ul.nav_menu {
-        display: none;
     }
 
     .sub-nav-bar {

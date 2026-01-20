@@ -7,7 +7,7 @@
 @section('content')
     <section>
         <div class="post_container">
-            <div class="trending">
+            {{-- <div class="trending">
                 <div class="side_column_text">
                     <h2>Trending</h2>
                 </div>
@@ -29,7 +29,7 @@
                         </div>
                     </a>
                 @endforeach
-            </div>
+            </div> --}}
             <div class="category_posts">
                 <div class="category_post">
                     @foreach ($posts as $post)

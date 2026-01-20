@@ -10,6 +10,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ResultController;
 use App\Models\Question;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Metadata\PostCondition;
 
 // Route::get('/', function () {
 //     return view('front/quiz');
@@ -25,21 +26,6 @@ Route::prefix('v1')->group(function () {
 
 Route::post('quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
 Route::get('quiz/result', [ResultController::class, 'result'])->name('quiz.result');
-
-Route::get('quiz/category/create', [CategoryController::class, 'create'])->name('category.create');
-
-
-Route::get('quiz/post/create', [PostController::class, 'create'])->name('post.create');
-// Route::get('home', [PostController::class, 'index'])->name('posts.index');
-
-Route::get('quiz/question/create', [QuestionController::class, 'create'])->name('question.create');
-Route::post('quiz/question/store', [QuestionController::class, 'store'])->name('question.store');
-
-Route::get('quiz/option/add', [OptionController::class, 'create'])->name('option.create');
-Route::post('quiz/option/store', [OptionController::class, 'store'])->name('option.store');
-
-Route::get('create/result', [PostController::class, 'index'])->name('result.index');
-Route::post('store/result', [ResultController::class, 'store'])->name('result.store');
 
 // Route::get('/home', function(){
 //     return view('front/home');
@@ -76,3 +62,5 @@ Route::post('admin/questions/store', [QuestionController::class, 'store'])->name
 Route::get('admin/questions/edit/{question}', [QuestionController::class, 'edit'])->name('admin.question.edit');
 Route::put('admin/questions/update/{question}', [QuestionController::class, 'update'])->name('admin.question.update');
 Route::delete('admin/questions/delete/{question}', [QuestionController::class, 'destroy'])->name('admin.question.delete');
+
+Route::get('admin/getPostByCategory', [PostController::class, 'getPostByCategory'])->name('admin.getPostByCategory');

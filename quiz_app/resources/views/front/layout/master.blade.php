@@ -18,8 +18,24 @@
         <nav>
             <div class="web_logo">
                 <a href="#">
-                    <img src="{{ asset('images/app_logo.png') }}" alt="">
+                    <img src="{{ asset('images/app2_logo.png') }}" alt="">
                 </a>
+            </div>
+            <div class="category_nav">
+                <ul>
+                    <li>
+                        <a href="{{ route('category.index') }}">Recents All</a>
+                    </li>
+                    @forelse ($categorys as $cat)
+                        <li>
+                            <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
+                        </li>
+                    @empty
+                        <li>
+                            <a href="#">No Record Found</a>
+                        </li>
+                    @endforelse
+                </ul>
             </div>
             <div class="nav_item">
                 <ul class="nav_menu">
@@ -32,22 +48,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="sub-nav-bar">
-            <ul>
-                <li>
-                    <a href="{{ route('category.index') }}">Recents All</a>
-                </li>
-                @forelse ($categorys as $cat)
-                    <li>
-                        <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
-                    </li>
-                @empty
-                    <li>
-                        <a href="#">No Record Found</a>
-                    </li>
-                @endforelse
-            </ul>
-        </div>
         <div class="sidebar">
             <ul>
                 <li>

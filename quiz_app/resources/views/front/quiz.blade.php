@@ -31,31 +31,29 @@
                             <div class="question">
                                 <h1>{{ $question->question }}</h1>
                             </div>
-                            @if ($question->options)
-                                <ul class="question_option">
+                            <ul class="question_option">
 
-                                    <li class="option">
-                                        <input type="radio" value="1" id="q{{ $question->id }}_a"
-                                            name="answers[{{ $question->id }}]">
-                                        <label for="q{{ $question->id }}_a">{{ $question->options->option_a }}</label>
-                                    </li>
-                                    <li class="option">
-                                        <input type="radio" value="2" id="q{{ $question->id }}_b"
-                                            name="answers[{{ $question->id }}]">
-                                        <label for="q{{ $question->id }}_a">{{ $question->options->option_b }}</label>
-                                    </li>
-                                    <li class="option">
-                                        <input type="radio" value="3" id="q{{ $question->id }}_c"
-                                            name="answers[{{ $question->id }}]">
-                                        <label for="q{{ $question->id }}_a">{{ $question->options->option_c }}</label>
-                                    </li>
-                                    <li class="option">
-                                        <input type="radio" value="4" id="q{{ $question->id }}_d"
-                                            name="answers[{{ $question->id }}]">
-                                        <label for="q{{ $question->id }}_a">{{ $question->options->option_d }}</label>
-                                    </li>
-                                </ul>
-                            @endif
+                                <li class="option">
+                                    <input type="radio" value="1" id="q{{ $question->id }}_a"
+                                        name="answers[{{ $question->id }}]">
+                                    <label for="q{{ $question->id }}_a">{{ $question->option_a }}</label>
+                                </li>
+                                <li class="option">
+                                    <input type="radio" value="2" id="q{{ $question->id }}_b"
+                                        name="answers[{{ $question->id }}]">
+                                    <label for="q{{ $question->id }}_a">{{ $question->option_b }}</label>
+                                </li>
+                                <li class="option">
+                                    <input type="radio" value="3" id="q{{ $question->id }}_c"
+                                        name="answers[{{ $question->id }}]">
+                                    <label for="q{{ $question->id }}_a">{{ $question->option_c }}</label>
+                                </li>
+                                <li class="option">
+                                    <input type="radio" value="4" id="q{{ $question->id }}_d"
+                                        name="answers[{{ $question->id }}]">
+                                    <label for="q{{ $question->id }}_a">{{ $question->option_d }}</label>
+                                </li>
+                            </ul>
                         </div>
                     @endforeach
                     <button class="question_submit" type="submit">Submit</button>

@@ -99,12 +99,12 @@ $(document).ready(function () {
     loadPage("click", ".back_to_category");
 
     loadPage("click", ".add-post");
-    loadPage("click", ".edit-purchase");
+    loadPage("click", ".post-edit");
     loadPage("click", ".back_to_post");
 
-    loadPage("click", ".add-sells");
-    loadPage("click", ".return-sells");
-    loadPage("click", ".edit-sells");
+    loadPage("click", ".add-question");
+    loadPage("click", ".question-edit");
+    loadPage("click", ".back_to_question");
 
     loadPage("click", ".invoice");
 

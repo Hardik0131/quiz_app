@@ -47,6 +47,7 @@
     border-spacing: 0;
     border-radius: 12px;
     border: 1px solid #ccc;
+    margin-bottom: 50px;
 }
 
 .table thead {
@@ -264,4 +265,121 @@
     background: linear-gradient(90deg, #4f46e5, #22c55e);
     z-index: 9999;
     transition: width 0.3s ease;
+}
+
+/* 
+    Admin Form 
+*/
+
+#form {
+    background-color: transparent;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form_control {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form_control label {
+    font-size: 17px;
+    font-weight: 400;
+    padding-left: 5px;
+}
+
+.form_control input {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form_control textarea {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form_control input:focus {
+    outline: none;
+}
+
+.form_control input:focus-within {
+    border: #24634b;
+    box-shadow: 0 0 8px rgba(11, 94, 80, 0.7);
+    transition: 0.2s ease;
+}
+
+.submit_btn {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.submit_btn button {
+    background-color: #1367ff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit_btn button {
+    background-color: #1367ff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit_btn a {
+    color: #1367ff;
+    text-decoration: underline;
+}
+
+.category_alert {
+    width: 45%;
+    margin-bottom: 20px;
+    margin-left: -5px;
+}
+
+
+.error {
+    display: flex;
+    align-items: center;
+    background-color: #fbecb9;
+    padding: 10px 15px;
+    border-color: #ffeeba;
+    border-radius: 10px;
+    color: #856404;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    margin-left: -5px;
+    align-self: flex-start;
+    transition: all 0.5s ease;
+}
+
+.success {
+    display: flex;
+    align-items: center;
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+}
+
+.ri-close-line {
+    font-size: 19px;
+    cursor: pointer;
 }

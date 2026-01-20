@@ -78,7 +78,10 @@
                 <div class="table_cell">{{ $question->question ?: 'N/A' }}</div>
             </td>
             <td style="width: 15%">
-                <div class="table_cell">{{ $question->post->name ?: 'N/A' }}</div>
+                <div class="table_cell">{{ $question->category->name ?: 'N/A' }}</div>
+            </td>
+            <td style="width: 15%">
+                <div class="table_cell">{{ $question->post->post_name ?: 'N/A' }}</div>
             </td>
             <td style="width: 15%">
                 <div class="table_cell">

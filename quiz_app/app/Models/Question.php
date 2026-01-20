@@ -12,10 +12,19 @@ class Question extends Model
 
     protected $fillable = [
         'question',
+        'category_id',
         'post_id',
         'image',
+        'option_a',
+        'option_b',
+        'option_c',
+        'option_d',
         'desc'
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 
     public function post(){
         return $this->belongsTo(Post::class);

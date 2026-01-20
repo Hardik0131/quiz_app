@@ -1,7 +1,7 @@
 <footer>
     <div class="footer">
         <div class="footer_logo">
-            <img src="{{ asset('images/app_logo.png') }}" alt="">
+            <img src="{{ asset('images/app2_logo.png') }}" alt="">
         </div>
         <div class="footer_link">
             <div class="footer_link_top">
