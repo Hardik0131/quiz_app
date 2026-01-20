@@ -29,7 +29,7 @@ class PostController extends Controller
 
     public function addPost(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
 
         if ($request->ajax()) {
             return view('admin.post.addPost', compact('categories'));
@@ -171,11 +171,11 @@ class PostController extends Controller
     public function getPostByCategory(Request $request){
         if($request->category_id){
             return Post::where('category_id', $request->category_id)
-                ->select('id', 'post_name')
-                ->orderBy('post_name')
-                ->get();
+                    ->select('id', 'post_name')
+                    ->orderBy('post_name')
+                    ->get();
         }
 
-        return Post::select('id', 'post_name')->get(); 
+        return Post::select('id', 'post_name')->get();
     }
 }
