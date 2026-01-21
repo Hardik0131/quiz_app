@@ -18,4 +18,8 @@ class Category extends Model
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
 }
