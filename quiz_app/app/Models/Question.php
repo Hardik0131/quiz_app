@@ -29,9 +29,4 @@ class Question extends Model
     public function post(){
         return $this->belongsTo(Post::class);
     }
-
-    public function options(){
-        return $this->hasOne(Option::class);
-    }
-
 }
