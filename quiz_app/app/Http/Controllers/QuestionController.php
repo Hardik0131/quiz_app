@@ -93,6 +93,8 @@ class QuestionController extends Controller
     public function displayQuestion(Request $request)
     {
         $categories = Category::all();
+        $posts = Post::all();
+        $allQuestion = Question::all();
 
         $questions = Question::query()
             ->when($request->search, function ($q) use ($request) {
@@ -101,15 +103,15 @@ class QuestionController extends Controller
             })->orderBy('id', 'desc')->paginate(5);
 
         if ($request->ajax() && $request->has('page')) {
-            return view('admin.layout.row', compact('questions', 'categories'))->render();
+            return view('admin.layout.row', compact('questions', 'categories', 'posts', 'allQuestion'))->render();
         }
 
         if ($request->ajax()) {
-            return view('admin.question.question', compact('questions', 'categories'));
+            return view('admin.question.question', compact('questions', 'categories', 'posts', 'allQuestion'));
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.question.question', compact('questions', 'categories')),
+            'content' => view('admin.question.question', compact('questions', 'categories', 'posts', 'allQuestion')),
         ]);
     }
 
@@ -200,4 +202,26 @@ class QuestionController extends Controller
     //             ->orWhere('category_id', $request->category_id);
     //     })->select('id', 'question')->get();
     // }
+
+    public function getQuestionByCategory(Request $request){
+        if($request->category_id){
+            return Question::where('category_id', $request->category_id)
+                        ->select('id', 'question')
+                        ->orderBy('question')
+                        ->get();
+        }
+
+        return Question::select('id', 'question')->get();
+    }
+    
+    public function getQuestionByPost(Request $request){
+        if($request->post_id){
+            return Question::where('post_id', $request->post_id)
+                        ->select('id', 'question')
+                        ->orderBy('question')
+                        ->get();
+        }
+
+        return Question::select('id', 'question')->get();
+    }
 }
