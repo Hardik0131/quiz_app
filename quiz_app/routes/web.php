@@ -64,3 +64,6 @@ Route::put('admin/questions/update/{question}', [QuestionController::class, 'upd
 Route::delete('admin/questions/delete/{question}', [QuestionController::class, 'destroy'])->name('admin.question.delete');
 
 Route::get('admin/getPostByCategory', [PostController::class, 'getPostByCategory'])->name('admin.getPostByCategory');
+
+Route::get('admin/getQuestionByCategory', [QuestionController::class, 'getQuestionByCategory'])->name('admin.getQuestionByCategory');
+Route::get('admin/getQuestionByPost', [QuestionController::class, 'getQuestionByPost'])->name('admin.getQuestionByPost');
