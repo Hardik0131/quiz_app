@@ -96,11 +96,26 @@ class QuestionController extends Controller
         $posts = Post::all();
         $allQuestion = Question::all();
 
+        // Search and filter Query 
         $questions = Question::query()
+            ->when($request->category_id, function ($q) use ($request) {
+                $q->where('category_id', $request->category_id);
+            })
+            ->when($request->post_id, function ($q) use ($request) {
+                $q->where('post_id', $request->post_id);
+            })
+            ->when($request->question_id, function ($q) use ($request) {
+                $q->where('id', $request->question_id);
+            })
             ->when($request->search, function ($q) use ($request) {
-                $q->where('question', 'like', "%{$request->search}%")
-                    ->orWhere('desc', 'like', "%{$request->search}%");
-            })->orderBy('id', 'desc')->paginate(5);
+                $q->where(function ($static) use ($request){
+                    $static->where('question', 'like', "%{$request->search}%")
+                           ->orWhere('desc', 'like', "%{$request->search}%");
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(5)
+            ->withQueryString();
 
         if ($request->ajax() && $request->has('page')) {
             return view('admin.layout.row', compact('questions', 'categories', 'posts', 'allQuestion'))->render();
@@ -121,9 +136,9 @@ class QuestionController extends Controller
     public function edit(Request $request, Question $question)
     {
         $categories = Category::orderBy('name')->get();
-        $posts = Post::where('category_id', $request->category_id)
-                    ->select('id', 'post_name')
-                    ->get();
+        $posts = Post::where(old('category_id', $request->categry_id))
+            ->select('id', 'post_name')
+            ->get();
 
         if ($request->ajax()) {
             return view('admin.question.edit', compact('posts', 'question', 'categories'));
@@ -203,23 +218,25 @@ class QuestionController extends Controller
     //     })->select('id', 'question')->get();
     // }
 
-    public function getQuestionByCategory(Request $request){
-        if($request->category_id){
+    public function getQuestionByCategory(Request $request)
+    {
+        if ($request->category_id) {
             return Question::where('category_id', $request->category_id)
-                        ->select('id', 'question')
-                        ->orderBy('question')
-                        ->get();
+                ->select('id', 'question')
+                ->orderBy('question')
+                ->get();
         }
 
         return Question::select('id', 'question')->get();
     }
-    
-    public function getQuestionByPost(Request $request){
-        if($request->post_id){
+
+    public function getQuestionByPost(Request $request)
+    {
+        if ($request->post_id) {
             return Question::where('post_id', $request->post_id)
-                        ->select('id', 'question')
-                        ->orderBy('question')
-                        ->get();
+                ->select('id', 'question')
+                ->orderBy('question')
+                ->get();
         }
 
         return Question::select('id', 'question')->get();
