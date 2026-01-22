@@ -130,7 +130,116 @@ td.action_btn {
 
 /* Table Code  */
 
-.table_cell img{
+.table_cell img {
     object-fit: cover;
     height: 100px;
+}
+
+/* Filter Bar */
+
+.filter-bar {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    gap: 10px;
+    align-items: center;
+}
+
+.category_select,
+.post_select,
+.question_select {
+    width: 23%;
+}
+
+.filter-select-wrapper {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.filter-select-wrapper select {
+    width: 100%;
+}
+
+.filter-select-wrapper select:focus {
+    outline: none;
+}
+
+.filter-bar .btn {
+    align-self: center;
+}
+
+.filter-bar .btn button {
+    align-self: center;
+    color: #fff;
+    background-color: #1367ff;
+    padding: 8px 15px;
+    border: 1px solid #c3ced6;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.filter-bar .btn button:hover {
+    transform: translateY(-2px);
+    padding: 10px 17px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* search input */
+
+.input_container {
+    border-radius: 5px;
+    border: 2px solid rgb(185, 179, 179);
+    padding: 0 12px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+}
+
+.input_container input {
+    width: 100%;
+    padding: 5px;
+}
+
+.input_container span {
+    font-size: 18px;
+}
+
+.input_container i {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    align-self: center;
+}
+
+.input_container input:focus{
+    outline: none;
+}
+
+.input_container:hover span i{
+    display: none;
+}
+
+.input_container:focus-within {
+    border: #24634b;
+    box-shadow: 0 0 8px rgba(11, 94, 80, 0.7);
+    transition: 0.2s ease;
+}
+
+.input_container:focus-within span i{
+     display: none;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: inherit;
 }
