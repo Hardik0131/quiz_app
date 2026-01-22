@@ -35,7 +35,7 @@
             <div class="select_post_category">
                 <label for="select_category">Select Category</label>
                 <div class="select-wrapper">
-                    <select name="category_id" id="category_id" data-post-url="{{ route('admin.getPostByCategory') }}">
+                    <select name="category_id" id="category_id" data-post-url="{{ route('admin.getPostByCategory') }}" data-question-url="{{ route('admin.getQuestionByCategory')}}">
                         <option value="" id="default" disabled selected hidden>-- Select Category --</option>
                         @forelse ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -48,7 +48,7 @@
             <div class="select_post_category">
                 <label for="select_post">Select Post</label>
                 <div class="select-wrapper">
-                    <select name="post_id" id="post_id">
+                    <select name="post_id" id="post_id" data-question-url="{{ route('admin.getQuestionByCategory')}}">
                         <option value="" id="default" disabled selected hidden>-- Select Post --
                         </option>
                         @forelse ($posts as $post)

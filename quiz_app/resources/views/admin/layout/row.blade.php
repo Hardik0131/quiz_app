@@ -107,7 +107,7 @@
         </tr>
     @empty
         <tr>
-            <td colspan="5" style="text-align: center; padding:20px;">
+            <td colspan="100" style="text-align: center; padding:20px;">
                 No Question Found
             </td>
         </tr>
@@ -115,7 +115,7 @@
 @endif
 
 <tr>
-    <td colspan="4">
+    <td colspan="100">
         <div class="pagination-wrapper">
             @include('admin.layout.pagination')
         </div>
