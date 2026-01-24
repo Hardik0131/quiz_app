@@ -12,6 +12,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'short_desc',
+        'slug',
         'long_desc'
     ];
 
@@ -21,5 +22,13 @@ class Category extends Model
 
     public function questions(){
         return $this->hasMany(Question::class);
+    }
+
+    public function results(){
+        return $this->hasMany(Result::class);
+    }
+
+    public function getRouteKeyName(){
+        return 'slug';
     }
 }

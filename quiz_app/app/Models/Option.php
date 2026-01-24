@@ -12,9 +12,13 @@ class Option extends Model
     protected $fillable = [
         'question_id',
         'option_a',
+        'a_val',
         'option_b',
+        'b_val',
         'option_c',
+        'c_val',
         'option_d',
+        'd_val',
         'desc',
     ];
 

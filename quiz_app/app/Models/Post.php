@@ -11,6 +11,7 @@ class post extends Model
 
     protected $fillable = [
         'post_name',
+        'slug',
         'category_id',
         'image',
         'desc',
@@ -26,5 +27,10 @@ class post extends Model
 
     public function results(){
         return $this->hasMany(Result::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
