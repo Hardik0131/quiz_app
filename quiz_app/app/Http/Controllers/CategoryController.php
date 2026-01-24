@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
@@ -23,7 +24,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    
+
     // public function create()
     // {
     //     return view('category');
@@ -40,8 +41,16 @@ class CategoryController extends Controller
             'long_desc' => 'nullable',
         ]);
 
+        $slug = Str::slug($request->name);
+
+        $count = Category::where('slug', 'LIKE', "{$slug}%")->count();
+        if ($count) {
+            $slug .= '-' . ($count + 1);
+        }
+
         Category::create([
             'name' => $request->name,
+            'slug' => $slug,
             'short_desc' => $request->short_desc,
             'long_desc' => $request->long_desc,
         ]);
@@ -49,23 +58,22 @@ class CategoryController extends Controller
         return back()->with('success', 'Category Create SuccesFully');
     }
 
-    public function categoryPost($name)
+    public function categoryPost(Category $category)
     {
         $categories = Category::all();
-        $category = Category::where('name', $name)->firstOrFail();
+        $category = Category::where('name', $category->name)->firstOrFail();
         $posts = Post::with('category')->where('category_id', $category->id)->get();
         return view('front.home', compact('categories', 'posts', 'category'));
     }
 
-    public function postQuestion($category_name, $post_name)
+    public function postQuestion(Category $category, Post $post)
     {
-        $category_name = urldecode($category_name);
-        $post_name = urldecode($post_name);
+        if ($post->category_id !== $category->id) {
+            abort(404);
+        }
 
-        $posts = Post::all();
-        $category = Category::where('name', $category_name)->firstOrFail();
-        $post = Post::where('post_name', $post_name)->where('category_id', $category->id)->firstOrFail();
-        $questions = $post->questions()->with('options')->get();
+        $posts = Post::where('category_id', $category->id)->get();
+        $questions = $post->questions()->get();
 
         return view('front.quiz', compact('category', 'posts', 'post', 'questions'));
     }
@@ -112,7 +120,7 @@ class CategoryController extends Controller
             return view('admin.layout.row', compact('categories'))->render();
         };
 
-        if($request->ajax()){
+        if ($request->ajax()) {
             return view('admin.category.category', compact('categories'));
         }
 
@@ -153,12 +161,16 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => ['required', Rule::unique('categories', 'name')->ignore($category->id)],
+            'slug' => 'unique:categories,slug',
             'short_desc' => 'nullable',
             'long_desc' => 'nullable',
         ]);
 
+        $slug = Str::slug($request->name);
+
         $category->update([
             'name' => $request->name,
+            'slug' => $slug,
             'short_desc' => $request->short_desc,
             'long_desc' => $request->long_desc,
         ]);
@@ -197,14 +209,14 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        try{
+        try {
             $category->delete();
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Category Delete Successfully',
-            ]) ;
-        } catch(\Throwable $e){
+            ]);
+        } catch (\Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
