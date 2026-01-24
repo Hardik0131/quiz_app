@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -47,12 +48,14 @@ class PostController extends Controller
     {
         $request->validate([
             'post_name' => 'required',
+            'slug' => 'unique:posts,slug',
             'category_id' => 'required|exists:categories,id',
             'image' => 'required|image',
             'desc' => 'required',
         ]);
 
         $filename = null;
+        $slug = Str::slug($request->post_name);
 
         if ($request->has('image')) {
             $filename = $request->file('image')->store('post', 'public');
@@ -61,6 +64,7 @@ class PostController extends Controller
         Post::create([
             'post_name' => $request->post_name,
             'category_id' => $request->category_id,
+            'slug' => $slug,
             'image' => $filename,
             'desc' => $request->desc,
         ]);
@@ -70,23 +74,32 @@ class PostController extends Controller
 
     public function displayPost(Request $request)
     {
+        $categories = Category::all();
         $posts = Post::query()
-            ->when($request->search, function ($q) use ($request) {
-                $q->where('post_name', 'like', "%{$request->search}%")
-                    ->orWhere('desc', 'like', "%{$request->search}%");
+            ->when($request->category_id, function ($q) use ($request) {
+                $q->where('category_id', $request->category_id);
             })
-            ->orderBy('id', 'desc')->paginate(5);
+            ->when($request->post_id, function ($q) use ($request) {
+                $q->where('post_id', $request->category_id);
+            })
+            ->when($request->search, function ($q) use ($request) {
+                $q->where(function ($static) use ($request) {
+                    $static->where('post_name', 'like', "%{$request->search}%")
+                        ->orWhere('desc', 'like', "%{$request->search}%");
+                });
+            })
+            ->orderBy('id', 'desc')->paginate(5)->withQueryString();
 
         if ($request->ajax() && $request->has('page')) {
-            return view('admin.layout.row', compact('posts'))->render();
+            return view('admin.layout.row', compact('posts', 'categories'))->render();
         }
 
         if ($request->ajax()) {
-            return view('admin.post.post', compact('posts'));
+            return view('admin.post.post', compact('posts', 'categories'));
         }
 
         return view('admin.layout.master', [
-            'content' => view('admin.post.post', compact('posts')),
+            'content' => view('admin.post.post', compact('posts', 'categories')),
         ], compact('posts'));
     }
 
@@ -149,18 +162,18 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(post $post)
+    public function destroy($id)
     {
-        $post = Post::findOrFail($post->id);
+        $post = Post::findOrFail($id);
 
-        try{
+        try {
             $post->delete();
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Post Delete Successfully',
             ]);
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
@@ -168,12 +181,15 @@ class PostController extends Controller
         }
     }
 
-    public function getPostByCategory(Request $request){
-        if($request->category_id){
-            return Post::where('category_id', $request->category_id)
-                    ->select('id', 'post_name')
-                    ->orderBy('post_name')
-                    ->get();
+    public function getPostByCategory(Request $request)
+    {
+        if ($request->category_id) {
+            return Post::when(filled($request->category_id), function ($q) use ($request) {
+                $q->where('category_id', $request->category_id);
+            })
+                ->select('id', 'post_name')
+                ->orderBy('post_name')
+                ->get();
         }
 
         return Post::select('id', 'post_name')->get();

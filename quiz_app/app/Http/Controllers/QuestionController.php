@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
 
 class QuestionController extends Controller
@@ -53,15 +54,21 @@ class QuestionController extends Controller
             'category_id' => 'required|exists:categories,id',
             'post_id' => 'required|exists:posts,id',
             'question' => 'required',
+            'slug' => 'unique:questions,slug',
             'image' => 'required',
             'option_a' => 'required',
+            'a_val' => 'required',
             'option_b' => 'required',
+            'b_val' => 'required',
             'option_c' => 'required',
+            'c_val' => 'required',
             'option_d' => 'required',
+            'd_val' => 'required',
             'desc' => 'nullable',
         ]);
 
         $filename = null;
+        $slug = Str::slug($request->question);
 
         if ($request->has('image')) {
             $filename = $request->file('image')->store('question', 'public');
@@ -71,11 +78,16 @@ class QuestionController extends Controller
             'question' => $request->question,
             'category_id' => $request->category_id,
             'post_id' => $request->post_id,
+            'slug' => $slug,
             'image' => $filename,
             'option_a' => $request->option_a,
+            'a_val' => $request->a_val,
             'option_b' => $request->option_b,
+            'b_val' => $request->b_val,
             'option_c' => $request->option_c,
+            'c_val' => $request->c_val,
             'option_d' => $request->option_d,
+            'd_val' => $request->d_val,
             'desc' => $request->desc,
         ]);
 
@@ -110,7 +122,7 @@ class QuestionController extends Controller
             ->when($request->search, function ($q) use ($request) {
                 $q->where(function ($static) use ($request){
                     $static->where('question', 'like', "%{$request->search}%")
-                           ->orWhere('desc', 'like', "%{$request->search}%");
+                        ->orWhere('desc', 'like', "%{$request->search}%");
                 });
             })
             ->orderBy('id', 'desc')
@@ -155,17 +167,23 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $request->validate([
-            'question' => 'required',
+            'question' => 'required|unique:questions,question',
             'post_id' => 'required|exists:posts,id',
+            'slug' => 'unique:questions,slug',
             'image' => 'nullable',
             'option_a' => 'required',
+            'a_val' => 'required',
             'option_b' => 'required',
+            'b_val' => 'required',
             'option_c' => 'required',
+            'c_val' => 'required',
             'option_d' => 'required',
+            'd_val' => 'required',
             'desc' => 'nullable',
         ]);
 
         $filename = $question->image;
+        $slug = Str::slug($request->question);
 
         if ($request->has('image')) {
             if ($question->image && Storage::disk('public')->exists($question->image)) {
@@ -178,11 +196,16 @@ class QuestionController extends Controller
         $question->update([
             'question' => $request->question,
             'post_id' => $request->post_id,
+            'slug' => $slug,
             'image' => $filename,
             'option_a' => $request->option_a,
+            'a_val' => $request->a_val,
             'option_b' => $request->option_b,
+            'b_val' => $request->b_val,
             'option_c' => $request->option_c,
+            'c_val' => $request->c_val,
             'option_d' => $request->option_d,
+            'd_val' => $request->d_val,
             'desc' => $request->desc,
         ]);
 
@@ -190,11 +213,11 @@ class QuestionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource `fro`m storage.
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        $question = Question::findOrFail($question->id);
+        $question = Question::findOrFail($id);
 
         try {
             $question->delete();

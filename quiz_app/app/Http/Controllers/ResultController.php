@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Pcntl\QosClass;
 
 class ResultController extends Controller
@@ -61,6 +62,7 @@ class ResultController extends Controller
         $request->validate([
             'category_id' => 'required|exists:categories,id',
             'post_id' => 'required|exists:posts,id',
+            'slug' => 'unique:results,slug',
             'level' => 'required|in:low,medium,hard',
             'title' => 'required',
             'image' => 'required|image',
@@ -68,6 +70,7 @@ class ResultController extends Controller
         ]);
 
         $filename = null;
+        $slug = Str::slug($request->title);
 
         if ($request->has('image')) {
             $filename = $request->file('image')->store('result', 'public');
@@ -96,6 +99,7 @@ class ResultController extends Controller
             'category_id' => $request->category_id,
             'post_id' => $request->post_id,
             'level' => $request->level,
+            'slug' => $slug,
             'min_score' => $minScore,
             'max_score' => $maxScore,
             'title' => $request->title,
@@ -123,7 +127,7 @@ class ResultController extends Controller
             })
             ->when($request->search, function ($q) use ($request) {
                 $q->where(function ($static) use ($request) {
-                    $static->where('question', 'like', "%{$request->search}%")
+                    $static->where('title', 'like', "%{$request->search}%")
                         ->orWhere('desc', 'like', "%{$request->search}%");
                 });
             })
@@ -242,9 +246,9 @@ class ResultController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Result $result)
+    public function destroy($id)
     {
-        $result = Result::findOrFail($result->id);
+        $result = Result::findOrFail($id);
 
         try{
             $result->delete();
