@@ -23,4 +23,12 @@ $(document).ready(function () {
         "/admin/result/delete/",
         ".result-delete-alert",
     );
+
+    $(document).on("click", "#applyFilter", function () {
+        $("#postBody").html(
+            `<option value="" colspan=100>Loading..</option>`,
+        );
+
+        applyFilter(1, "/admin/posts", "#postBody");
+    });
 });

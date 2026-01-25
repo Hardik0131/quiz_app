@@ -1,15 +1,60 @@
-import { deleteThing, loadPagination, showAlert } from "./master";
+import {
+    applyFilter,
+    deleteThing,
+    filterPostByCategory,
+    loadPagination,
+    showAlert,
+} from "./master";
+
+// function filterQuestionByCategoryOrPost(
+//     event,
+//     idOrClass,
+//     questionId = "",
+//     questionUrl = "",
+// ) {
+//     $(document).on(event, idOrClass, function () {
+//         let categoryId = $(this).val();
+//         let questionSelect = $(questionId);
+//         let url = $(this).data(questionUrl);
+
+//         questionSelect.html(`<option value="">Loading..</option>`);
+
+//         $.ajax({
+//             url: url,
+//             type: "GET",
+//             data: { category_id: categoryId },
+//             success: function (response) {
+//                 questionSelect.html(
+//                     `<option value="">-- Select Question --</option>`,
+//                 );
+
+//                 if (response.length === 0) {
+//                     questionSelect.append(
+//                         `<option value="" disabled>Not Question Found</option>`,
+//                     );
+//                 }
+
+//                 response.forEach((post) => {
+//                     questionSelect.append(
+//                         `<option value="${post.id}">${post.question}</option>`,
+//                     );
+//                 });
+//             },
+//             error: function () {
+//                 questionSelect.html(
+//                     `<option value="">Error to Loading</option>`,
+//                 );
+//             },
+//         });
+//     });
+// }
 
 $(document).ready(function () {
-    $(document).on("keyup", "#searchInput", function () {
-        loadPagination(1, "#questionBody", "/admin/questions");
-    });
-
     $(document).on("click", ".custom-pagination a", function (e) {
         e.preventDefault();
 
         let page = $(this).attr("href").split("page=")[1];
-        loadPagination(page, "#questionBody", "/admin/questions");
+        loadPagination(page, "#questionBody", "/admin/questions", 6);
     });
 
     $(document).on("click", ".close i.bx-x", function () {
@@ -20,40 +65,28 @@ $(document).ready(function () {
         "click",
         ".question_delete",
         "/admin/questions/delete/",
-        ".question-delete-alert"
+        ".question-delete-alert",
     );
 
-    $(document).on("change", "#category_id", function () {
-        let categoryId = $(this).val();
-        let postSelect = $("#post_id");
-        let url = $(this).data("post-url");
+    // for a question by category and post
 
-        postSelect.html(`<option value="">Loading..</option>`);
+    // filterQuestionByCategoryOrPost(
+    //     "change",
+    //     "#select_category",
+    //     "#select_question",
+    //     "question-url",
+    // );
+    // filterQuestionByCategoryOrPost(
+    //     "change",
+    //     "#select_post",
+    //     "#select_question",
+    //     "question-url",
+    // );
 
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: { category_id: categoryId },
-            success: function (response) {
-                postSelect.html(
-                    `<option value="" disabled hidden selected>-- Select Post --</option>`
-                );
+    // filter the data of table
+    $(document).on("click", "#applyFilter", function () {
+        $("#questionBody").html(`<option value="" colspan=100>Loading..</option>`);
 
-                if (response.length === 0) {
-                    postSelect.append(
-                        `<option value="">Not Post Found</option>`
-                    );
-                }
-
-                response.forEach((post) => {
-                    postSelect.append(
-                        `<option value="${post.id}">${post.post_name}</option>`
-                    );
-                });
-            },
-            error: function () {
-                postSelect.html(`<option value="">Error to Loading</option>`);
-            },
-        });
+        applyFilter(1, "/admin/questions", "#questionBody");
     });
 });

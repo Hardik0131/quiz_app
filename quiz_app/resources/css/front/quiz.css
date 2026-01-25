@@ -44,7 +44,7 @@ html {
 #form {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 
 .question_container {
@@ -166,6 +166,7 @@ html {
     display: flex;
     margin-top: 15px;
     gap: 15px;
+    margin-bottom: 10px;
 }
 
 .quiz_trending_post_count {

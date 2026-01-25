@@ -1,26 +1,35 @@
-html, body{
-    min-width: 100%;
-    min-height: 100%;
+.main-result-page{
+    min-height: 100vh;
+    background-color: white;
 }
 
 .result_container{
     width: 100% - 50px;
-    background-color: lightcoral;
+    background-color: lightblue;
     margin: 10px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    margin: 25px;
     padding: 25px;
+    gap: 50px;
+}
+
+.result_container img{
+    width: 50%;
 }
 
 .post_name_container{
     margin-bottom: 15px;
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
 }
 
 .post_name_container h1{
     font-size: 22px;
     font-weight: 500;
+    text-wrap: nowrap;
 }
 
 .result_container h2{

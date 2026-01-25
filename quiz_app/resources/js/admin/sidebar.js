@@ -36,26 +36,32 @@ $(document).ready(function () {
         }
     });
 
-    $(".profile-icon").click(function (event) {
+    /* For a Profile icon */
+
+    $(".profile-icon").on("click", function (event) {
         event.stopPropagation();
 
-        if ($(".profile-detail").hasClass("active")) {
-            $(".profile-icon i").removeClass("bx-user").addClass("bxs-user");
+        $(".profile-detail").toggleClass("userActive");
+
+        console.log("Hardik");
+        if ($(".profile-detail").hasClass("userActive")) {
+            $(".profile-icon i").removeClass("ri-user-3-line").addClass("ri-user-3-fill");
         } else {
-            $(".profile-icon i").removeClass("bxs-user").addClass("bx-user");
+            $(".profile-icon i").removeClass("ri-user-3-fill").addClass("ri-user-3-line");
         }
     });
 
-    $(document).click(function () {
-        $(".profile-detail").removeClass("active");
-        $(".profile-icon i").removeClass("bxs-user").addClass("bx-user");
+    $(document).on("click", function () {
+        console.log("Hello");
+        $(".profile-detail").removeClass("userActive");
+        $(".profile-icon i").removeClass("ri-user-3-fill").addClass("ri-user-3-line");
     });
 
-    $(".profile-detail").click(function (event) {
+    $(".profile-detail").on("click", function (event) {
         event.stopPropagation();
     });
 
-    $("projects .projects-search-box input").click(function () {
+    $("projects .projects-search-box input").on("click", function () {
         $(this).css("border", "none");
     });
 
@@ -105,8 +111,10 @@ $(document).ready(function () {
     loadPage("click", ".add-question");
     loadPage("click", ".question-edit");
     loadPage("click", ".back_to_question");
-
-    loadPage("click", ".invoice");
+    
+    loadPage("click", ".add-result");
+    loadPage("click", ".result-edit");
+    loadPage("click", ".back_to_result");
 
     window.onpopstate = function () {
         $(".main-content").load(location.pathname, function () {

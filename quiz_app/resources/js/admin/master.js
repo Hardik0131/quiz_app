@@ -12,17 +12,17 @@ export function showAlert(type, message, url) {
                     </div>
                     <button class="close"><i class="bx bx-x"></i></button>
                 </div>
-            `
+            `,
         )
         .fadeIn(200);
 }
 
-export function loadPagination(page = 1, location, url) {
+export function loadPagination(page = 1, location, url, spancol = 4) {
     let search = $("#searchInput").val();
 
     $(location).html(`
             <tr>
-                <td colspan="4" style="text-align:center; padding:20px;">
+                <td colspan="${spancol}" style="text-align:center; padding:20px;">
                     Loading...
                 </td>
             </tr>
@@ -54,7 +54,7 @@ export function deleteThing(event, eLocation, url, alertUrl) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log('Hardik');
+                console.log("Hardik");
                 if (response.status === "success") {
                     row.fadeOut(400, function () {
                         $(this).remove();
@@ -73,19 +73,64 @@ export function deleteThing(event, eLocation, url, alertUrl) {
     });
 }
 
-$(document).ready(function () {
-    $(".profile-icon").click(function (event) {
-        event.stopPropagation();
+// For a Filter Category and Post
 
-        $(".profile-detail").toggleClass("active");
-
-        if ($(".profile-detail").hasClass("active")) {
-            $(".profile-icon i").removeClass("bx-user").addClass("bxs-user");
-        } else {
-            $(".profile-icon i").removeClass("bxs-user").addClass("bx-user");
-        }
+export function applyFilter(page = 1, url, tableBody) {
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+            category_id: $("#select_category").val(),
+            search: $("#searchInput").val(),
+            post_id: $("#select_post").val(),
+            page: page,
+        },
+        success: function (response) {
+            $(tableBody).html(response);
+        },
     });
+}
 
+export function filterPostByCategory(event, idOrClass, postId = null) {
+    $(document).on(event, idOrClass, function () {
+        let categoryId = $(this).val();
+        let postSelect = $(postId);
+        let url = $(this).data("postUrl");
+
+        if (!categoryId) {
+            postSelect.html(`<option value="">-- Select Post --</option>`);
+            return;
+        }
+
+        postSelect.html(`<option value="">Loading..</option>`);
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: { category_id: categoryId },
+            success: function (response) {
+                postSelect.html(`<option value="">-- Select Post --</option>`);
+
+                if (response.length === 0) {
+                    postSelect.append(
+                        `<option value="" disabled>Not Post Found</option>`,
+                    );
+                }
+
+                response.forEach((post) => {
+                    postSelect.append(
+                        `<option value="${post.id}">${post.post_name}</option>`,
+                    );
+                });
+            },
+            error: function () {
+                postSelect.html(`<option value="">Error to Loading</option>`);
+            },
+        });
+    });
+}
+
+$(document).ready(function () {
     // Search Code
 
     $("category-content .search-box input").click(function () {
@@ -95,6 +140,16 @@ $(document).ready(function () {
     $("#searchInput").on("keyup", function () {
         loadSearch();
     });
+
+    // for a addQuestion
+    filterPostByCategory("change", "#category_id", "#post_id", "post-url");
+
+    // for a filter question on table
+    filterPostByCategory(
+        "change",
+        "#select_category",
+        "#select_post",
+    );
 
     // function loadSearch() {
     //     console.log("Loaded");

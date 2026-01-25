@@ -1,3 +1,7 @@
+footer{
+    background-color: black;
+}
+
 .footer{
     display: flex;
     flex-direction: column;

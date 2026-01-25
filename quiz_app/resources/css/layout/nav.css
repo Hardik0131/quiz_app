@@ -77,6 +77,16 @@ nav {
     display: none;
 }
 
+.nav_link{
+    height: 100%;
+}
+
+/* 
+.nav_link:hover{
+    color: rgb(255, 131, 131);
+    transition: all 0.5s ease;
+} */
+
 .ri-facebook-circle-line:hover {
     color: #1877F2;
     filter: drop-shadow(0 16px 16px darkblue);

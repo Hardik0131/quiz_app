@@ -122,6 +122,21 @@ td.action_btn {
     outline: none;
 }
 
+.option_val{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.option_val .option{
+    width: 50%;
+}
+
+.option_val .val{
+    width: 50%;
+}
+
 .form_control input:focus-within {
     border: #24634b;
     box-shadow: 0 0 8px rgba(11, 94, 80, 0.7);

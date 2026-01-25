@@ -16,17 +16,18 @@
 .side_column_text {
     z-index: 0;
     background-color: #FF4AAB;
-    width: 150px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    text-align: center;
     transform: skewX(-15deg);
-    align-self: center;
+    align-self: flex-start;
 }
 
 .side_column_text h2 {
     font-size: 22px;
     font-weight: 600;
     color: white;
+    padding: 8px 15px;
 }
 
 /* Category Post */
@@ -153,6 +154,11 @@
 .most_tested_posts:hover .tested_post_desc h1 {
     color: #FF4AAB;
 }
+
+/* #form{
+    display: flex;
+    justify-content: start;
+} */
 
 @media (max-width:1600px){
     .category_post{
