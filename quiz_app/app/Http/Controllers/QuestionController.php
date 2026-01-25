@@ -148,7 +148,7 @@ class QuestionController extends Controller
     public function edit(Request $request, Question $question)
     {
         $categories = Category::orderBy('name')->get();
-        $posts = Post::where(old('category_id', $request->categry_id))
+        $posts = Post::where('category_id', old('category_id', $question->category_id))
             ->select('id', 'post_name')
             ->get();
 
@@ -167,7 +167,7 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $request->validate([
-            'question' => 'required|unique:questions,question',
+            'question' => 'required|exists:questions,question',
             'post_id' => 'required|exists:posts,id',
             'slug' => 'unique:questions,slug',
             'image' => 'nullable',

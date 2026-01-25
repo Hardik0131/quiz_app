@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -15,6 +16,8 @@ class QuizController extends Controller
 
         $postId = $request->post_id;
         $total = array_sum($request->answers);
+
+        Post::where('id', $postId)->increment('attempts_count');
 
         session([
             'total_score' => $total,

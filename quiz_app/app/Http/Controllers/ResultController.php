@@ -22,6 +22,8 @@ class ResultController extends Controller
             abort(404);
         }
 
+        
+
         $score = session('total_score');
         $postId = session('post_id');
 
