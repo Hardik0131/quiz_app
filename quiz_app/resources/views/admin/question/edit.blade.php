@@ -37,7 +37,8 @@
                 </div>
             </div>
             <div class="select_post_category">
-                <label for="select_post">Select Post <small style="color: red">( If You want to change the Post first change the category )</small></label>
+                <label for="select_post">Select Post <small style="color: red">( If You want to change the Post first
+                        change the category )</small></label>
                 <div class="select-wrapper">
                     <select name="post_id" id="post_id">
                         @forelse ($posts as $post)
@@ -59,25 +60,49 @@
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image">
             </div>
-            <div class="form_control">
-                <label for="option_a">Option A</label>
-                <input type="text" name="option_a" id="option_a" placeholder="Enter Option A"
-                    value="{{ $question->option_a }}">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_a">Option A</label>
+                    <input type="text" name="option_a" id="option_a" placeholder="Enter Option A" value="{{ $question->option_a }}">
+                </div>
+                <div class="form_control val">
+                    <label for="a_val">Option A Value</label>
+                    <input type="number" name="a_val" id="a_val" placeholder="Option A Value" min="1"
+                        max="4" value="{{ $question->a_val }}">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_b">Option B</label>
-                <input type="text" name="option_b" id="option_b" placeholder="Enter Option B"
-                    value="{{ $question->option_b }}">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_b">Option B</label>
+                    <input type="text" name="option_b" id="option_b" placeholder="Enter Option B" value="{{ $question->option_b }}">
+                </div>
+                <div class="form_control val">
+                    <label for="b_val">Option B Value</label>
+                    <input type="number" name="b_val" id="b_val" placeholder="Option B Value" min="1"
+                        max="4" value="{{ $question->b_val }}">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_c">Option C</label>
-                <input type="text" name="option_c" id="option_c" placeholder="Enter Option C"
-                    value="{{ $question->option_c }}">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_c">Option C</label>
+                    <input type="text" name="option_c" id="option_c" placeholder="Enter Option C" value="{{ $question->option_c }}">
+                </div>
+                <div class="form_control val">
+                    <label for="c_val">Option C Value</label>
+                    <input type="number" name="c_val" id="c_val" placeholder="Option C Value" min="1"
+                        max="4" value="{{ $question->c_val }}">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_d">Option D</label>
-                <input type="text" name="option_d" id="option_d" placeholder="Enter Option D"
-                    value="{{ $question->option_d }}">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_d">Option D</label>
+                    <input type="text" name="option_d" id="option_d" placeholder="Enter Option D" value="{{ $question->option_d }}">
+                </div>
+                <div class="form_control val">
+                    <label for="d_val">Option D Value</label>
+                    <input type="number" name="d_val" id="d_val" placeholder="Option D Value" min="1"
+                        max="4" value="{{ $question->d_val }}">
+                </div>
             </div>
             <div class="form_control">
                 <label for="desc">Description</label>

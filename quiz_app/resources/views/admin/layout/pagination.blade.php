@@ -4,4 +4,6 @@
     {!! $posts->links('vendor.pagination.category-pagination') !!}
 @elseif(request()->routeIs('admin.question.display'))
     {!! $questions->links('vendor.pagination.category-pagination') !!}
+@elseif(request()->routeIs('admin.result.display'))
+    {!! $results->links('vendor.pagination.category-pagination') !!}
 @endif

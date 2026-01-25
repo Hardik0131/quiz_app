@@ -25,16 +25,16 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::post('quiz/submit', [QuizController::class, 'submit'])->name('quiz.submit');
-Route::get('quiz/result', [ResultController::class, 'result'])->name('quiz.result');
+Route::get('{slug:slug}/result', [ResultController::class, 'result'])->name('quiz.result');
 
 // Route::get('/home', function(){
 //     return view('front/home');
 // });
 
 Route::get('/home', [CategoryController::class, 'index'])->name('category.index');
-Route::get('/home/{name}', [CategoryController::class, 'categoryPost'])->name('category.post');
+Route::get('/home/{category:slug}', [CategoryController::class, 'categoryPost'])->name('category.post');
 
-Route::get('category/{category_name}/post/{post_name}', [CategoryController::class, 'postQuestion'])->name('post.questions');
+Route::get('category/{category:slug}/post/{post:slug}', [CategoryController::class, 'postQuestion'])->name('post.questions');
 
 
 Route::get('/admin/category', [CategoryController::class, 'display'])->name('admin.category.display');
@@ -52,7 +52,7 @@ Route::get('admin/addpost', [PostController::class, 'addPost'])->name('admin.pos
 Route::post('admin/posts/store', [PostController::class, 'store'])->name('admin.post.store');
 Route::get('admin/posts/edit/{post}', [PostController::class, 'edit'])->name('admin.post.edit');
 Route::put('admin/posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
-Route::delete('admin/posts/delete/{post}', [PostController::class, 'destroy'])->name('admin.post.delete');
+Route::delete('admin/posts/delete/{id}', [PostController::class, 'destroy'])->name('admin.post.delete');
 
 // for a questions
 
@@ -61,9 +61,16 @@ Route::get('admin/addQuestion', [QuestionController::class, 'addQuestion'])->nam
 Route::post('admin/questions/store', [QuestionController::class, 'store'])->name('admin.question.store');
 Route::get('admin/questions/edit/{question}', [QuestionController::class, 'edit'])->name('admin.question.edit');
 Route::put('admin/questions/update/{question}', [QuestionController::class, 'update'])->name('admin.question.update');
-Route::delete('admin/questions/delete/{question}', [QuestionController::class, 'destroy'])->name('admin.question.delete');
+Route::delete('admin/questions/delete/{id}', [QuestionController::class, 'destroy'])->name('admin.question.delete');
 
 Route::get('admin/getPostByCategory', [PostController::class, 'getPostByCategory'])->name('admin.getPostByCategory');
 
 Route::get('admin/getQuestionByCategory', [QuestionController::class, 'getQuestionByCategory'])->name('admin.getQuestionByCategory');
 Route::get('admin/getQuestionByPost', [QuestionController::class, 'getQuestionByPost'])->name('admin.getQuestionByPost');
+
+Route::get('admin/results', [ResultController::class, 'displayResult'])->name('admin.result.display');
+Route::get('admin/addResult', [ResultController::class, 'addResult'])->name('admin.result.addResult');
+Route::post('admin/result/store', [ResultController::class, 'store'])->name('admin.result.store');
+Route::get('admin/result/edit/{result}', [ResultController::class, 'edit'])->name('admin.result.edit');
+Route::put('admin/result/update/{result}', [ResultController::class, 'update'])->name('admin.result.update');
+Route::delete('admin/result/delete/{id}', [ResultController::class, 'destroy'])->name('admin.result.delete');

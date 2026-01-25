@@ -35,7 +35,7 @@
                 <label for="long_desc">Long Description</label>
                 <textarea name="long_desc" id="long_desc" cols="10" rows="5" placeholder="Long Description Here...">{{ $category->long_desc }}</textarea>
             </div>
-            <div class="category_update">
+            <div class="category_update submit_btn">
                 <button type="submit">Update</button>
                 <a href="{{ route('admin.category.display') }}" data-url="{{ route('admin.category.display') }}"
                     class="back_to_category">Back to Home?</a>

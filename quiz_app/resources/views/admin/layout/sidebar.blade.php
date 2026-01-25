@@ -33,7 +33,9 @@
             <span class="tooltip">Question</span>
         </li>
         <li>
-            <a>
+            <a href="{{ route('admin.result.display') }}"
+                class="{{ request()->routeIs('admin.result*') ? 'active' : '' }} sidebar-link"
+                data-url="{{ route('admin.result.display') }}">
                 <i class="ri-bar-chart-line"></i>
                 <span class="links_name">Result</span>
             </a>

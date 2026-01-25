@@ -34,7 +34,10 @@
                 <div class="category_post">
                     @foreach ($posts as $post)
                         <a
-                            href="{{ route('post.questions', [urlencode($post->category->name), urlencode($post->post_name)]) }}">
+                            href="{{ route('post.questions', [
+                                'category' => $post->category->slug,
+                                'post' => $post->slug
+                            ]) }}">
                             <div class="post_card">
                                 <div class="category_post_image">
                                     <img src="{{ asset('storage/' . $post->image) }}" alt="img">
@@ -44,7 +47,7 @@
                                         {{ $post->category->name }}
                                     </div>
                                     <div class="category_post_text">
-                                        <h1>{{ $post->desc }}</h1>
+                                        <h1>{{ $post->post_name }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +72,7 @@
                                         {{ $post->category->name }}
                                     </div>
                                     <div class="tested_post_desc">
-                                        <h1>{{ $post->desc }}</h1>
+                                        <h1>{{ $post->post_name }}</h1>
                                     </div>
                                 </div>
                             </div>

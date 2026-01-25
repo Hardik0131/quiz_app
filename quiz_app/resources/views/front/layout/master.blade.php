@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/nav.js', 'resources/css/layout/nav.css', 'resources/css/category.css', 'resources/css/layout/footer.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/nav.js', 'resources/css/layout/nav.css', 'resources/css/layout/footer.css'])
     @yield('vite')
 </head>
 
@@ -17,7 +17,7 @@
     <header>
         <nav>
             <div class="web_logo">
-                <a href="#">
+                <a href="{{ route('category.index') }}">
                     <img src="{{ asset('images/app2_logo.png') }}" alt="">
                 </a>
             </div>
@@ -27,8 +27,8 @@
                         <a href="{{ route('category.index') }}">Recents All</a>
                     </li>
                     @forelse ($categorys as $cat)
-                        <li>
-                            <a href="{{ route('category.post', $cat->name) }}">{{ $cat->name }}</a>
+                        <li class="nav_link">
+                            <a href="{{ route('category.post', $cat->slug) }}" class="{{ request()->routeIs('category.post', $cat->slug) ? 'nav_active' : ''}}">{{ $cat->name }}</a>
                         </li>
                     @empty
                         <li>

@@ -112,6 +112,52 @@
             </td>
         </tr>
     @endforelse
+@elseif(request()->routeIs('admin.result.display'))
+    @forelse ($results as $result)
+        <tr>
+            <td style="width: 25%">
+                <div class="table_cell">{{ $result->title ?: 'N/A' }}</div>
+            </td>
+            <td style="width: 15%">
+                <div class="table_cell">{{ $result->category->name ?: 'N/A' }}</div>
+            </td>
+            <td style="width: 15%">
+                <div class="table_cell">{{ $result->post->post_name ?: 'N/A' }}</div>
+            </td>
+            <td style="width: 15%">
+                <div class="table_cell">
+                    {{ $result->level ?: 'N/A' }}
+                </div>
+            </td>
+            <td style="width: 25%">
+                <div class="table_cell">
+                    <img src="{{ asset('storage/' . $result->image) }}" alt="N/A">
+                </div>
+            </td>
+            <td style="width: 15%">
+                <div class="table_cell">
+                    {{ $result->desc ?: 'N/A' }}
+                </div>
+            </td>
+            <td class="action" style="width: 10%">
+                <div class="action-buttons">
+                    <div class="delete-btn result_delete" data-id="{{ $result->id }}">
+                        <i class="bx bx-trash"></i>
+                    </div>
+                    <a href="{{ route('admin.result.edit', $result) }}" class="result-edit"
+                        data-url="{{ route('admin.result.edit', $result) }}">
+                        <i class="bx bx-edit"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="100" style="text-align: center; padding:20px;">
+                No Result Found
+            </td>
+        </tr>
+    @endforelse
 @endif
 
 <tr>

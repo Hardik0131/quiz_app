@@ -35,7 +35,8 @@
             <div class="select_post_category">
                 <label for="select_category">Select Category</label>
                 <div class="select-wrapper">
-                    <select name="category_id" id="category_id" data-post-url="{{ route('admin.getPostByCategory') }}" data-question-url="{{ route('admin.getQuestionByCategory')}}">
+                    <select name="category_id" id="category_id" data-post-url="{{ route('admin.getPostByCategory') }}"
+                        data-question-url="{{ route('admin.getQuestionByCategory') }}">
                         <option value="" id="default" disabled selected hidden>-- Select Category --</option>
                         @forelse ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -48,7 +49,8 @@
             <div class="select_post_category">
                 <label for="select_post">Select Post</label>
                 <div class="select-wrapper">
-                    <select name="post_id" id="post_id" data-question-url="{{ route('admin.getQuestionByCategory')}}">
+                    <select name="post_id" id="post_id"
+                        data-question-url="{{ route('admin.getQuestionByCategory') }}">
                         <option value="" id="default" disabled selected hidden>-- Select Post --
                         </option>
                         @forelse ($posts as $post)
@@ -67,21 +69,49 @@
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image">
             </div>
-            <div class="form_control">
-                <label for="option_a">Option A</label>
-                <input type="text" name="option_a" id="option_a" placeholder="Enter Option A">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_a">Option A</label>
+                    <input type="text" name="option_a" id="option_a" placeholder="Enter Option A">
+                </div>
+                <div class="form_control val">
+                    <label for="a_val">Option A Value</label>
+                    <input type="number" name="a_val" id="a_val" placeholder="Option A Value" min="1"
+                        max="4" value="1">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_b">Option B</label>
-                <input type="text" name="option_b" id="option_b" placeholder="Enter Option B">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_b">Option B</label>
+                    <input type="text" name="option_b" id="option_b" placeholder="Enter Option B">
+                </div>
+                <div class="form_control val">
+                    <label for="b_val">Option B Value</label>
+                    <input type="number" name="b_val" id="b_val" placeholder="Option B Value" min="1"
+                        max="4" value="2">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_c">Option C</label>
-                <input type="text" name="option_c" id="option_c" placeholder="Enter Option C">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_c">Option C</label>
+                    <input type="text" name="option_c" id="option_c" placeholder="Enter Option C">
+                </div>
+                <div class="form_control val">
+                    <label for="c_val">Option C Value</label>
+                    <input type="number" name="c_val" id="c_val" placeholder="Option C Value" min="1"
+                        max="4" value="3">
+                </div>
             </div>
-            <div class="form_control">
-                <label for="option_d">Option D</label>
-                <input type="text" name="option_d" id="option_d" placeholder="Enter Option D">
+            <div class="option_val">
+                <div class="form_control option">
+                    <label for="option_d">Option D</label>
+                    <input type="text" name="option_d" id="option_d" placeholder="Enter Option D">
+                </div>
+                <div class="form_control val">
+                    <label for="d_val">Option D Value</label>
+                    <input type="number" name="d_val" id="d_val" placeholder="Option D Value" min="1"
+                        max="4" value="4">
+                </div>
             </div>
             <div class="form_control">
                 <label for="desc">Description</label>

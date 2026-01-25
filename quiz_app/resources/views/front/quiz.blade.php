@@ -12,7 +12,7 @@
                 <h2>{{ $category->name }}</h2>
             </div>
             <div id="category_title">
-                {{ $post->desc }}
+                {{ $post->post_name }}
             </div>
             <form action="{{ route('quiz.submit') }}" method="POST" id="form">
                 @csrf
@@ -34,22 +34,22 @@
                             <ul class="question_option">
 
                                 <li class="option">
-                                    <input type="radio" value="1" id="q{{ $question->id }}_a"
+                                    <input type="radio" value="{{ $question->a_val }}" id="q{{ $question->id }}_a"
                                         name="answers[{{ $question->id }}]">
                                     <label for="q{{ $question->id }}_a">{{ $question->option_a }}</label>
                                 </li>
                                 <li class="option">
-                                    <input type="radio" value="2" id="q{{ $question->id }}_b"
+                                    <input type="radio" value="{{ $question->b_val }}" id="q{{ $question->id }}_b"
                                         name="answers[{{ $question->id }}]">
                                     <label for="q{{ $question->id }}_a">{{ $question->option_b }}</label>
                                 </li>
                                 <li class="option">
-                                    <input type="radio" value="3" id="q{{ $question->id }}_c"
+                                    <input type="radio" value="{{ $question->c_val }}" id="q{{ $question->id }}_c"
                                         name="answers[{{ $question->id }}]">
                                     <label for="q{{ $question->id }}_a">{{ $question->option_c }}</label>
                                 </li>
                                 <li class="option">
-                                    <input type="radio" value="4" id="q{{ $question->id }}_d"
+                                    <input type="radio" value="{{ $question->d_val }}" id="q{{ $question->id }}_d"
                                         name="answers[{{ $question->id }}]">
                                     <label for="q{{ $question->id }}_a">{{ $question->option_d }}</label>
                                 </li>
@@ -77,7 +77,7 @@
                                         {{ $post->category->name }}
                                     </div>
                                     <div class="most_like_desc">
-                                        <h1>{{ $post->desc }}</h1>
+                                        <h1>{{ $post->post_name }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="quiz_trending_post_category">
                                 <p>{{ $post->category->name }}</p>
-                                <h1>{{ $post->desc }}</h1>
+                                <h1>{{ $post->post_name }}</h1>
                             </div>
                         </div>
                     </div>

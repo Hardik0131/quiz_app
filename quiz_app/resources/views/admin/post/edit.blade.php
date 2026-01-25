@@ -31,7 +31,7 @@
                 <div class="select-wrapper">
                     <select name="category_id" id="select_category">
                         @forelse ($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id' == $category->id ? 'selected' : '') }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id', $post->category_id == $category->id ? 'selected' : '') }}>{{ $category->name }}</option>
                         @empty
                             <option value="" disabled>Not Record Found</option>
                         @endforelse
