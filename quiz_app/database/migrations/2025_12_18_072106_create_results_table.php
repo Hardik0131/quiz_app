@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->string('level');
+            $table->string('slug');
             $table->integer('min_score');
             $table->integer('max_score');
             $table->string('title');
-            $table->string('desc')->nullable();
+            $table->string('image');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }
