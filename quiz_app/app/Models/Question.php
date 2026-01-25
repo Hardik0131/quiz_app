@@ -13,8 +13,13 @@ class Question extends Model
     protected $fillable = [
         'question',
         'category_id',
+        'slug',
         'post_id',
         'image',
+        'a_val',
+        'b_val',
+        'c_val',
+        'd_val',
         'option_a',
         'option_b',
         'option_c',
@@ -28,5 +33,9 @@ class Question extends Model
 
     public function post(){
         return $this->belongsTo(Post::class);
+    }
+
+    public function getRouteKeyName(){
+        return 'slug';
     }
 }
