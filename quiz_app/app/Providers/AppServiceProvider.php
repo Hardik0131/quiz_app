@@ -21,8 +21,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('front.layout.master', function($view){
-            $view->with('categorys', Category::all());
+        // View::composer('front.layout.nav_item', function ($view) {
+        //     $categories = Category::whereHas('posts', function ($q) {
+        //         $q->has('questions', '>=', 2)
+        //             ->has('results', '>=', 3);
+        //     })
+        //         ->limit(3)
+        //         ->orderBy('name')
+        //         ->get();
+
+        //     $view->with('categories', $categories);
+        // });
+
+        View::composer('front.layout.nav_item', function ($view) {
+            $categories = Category::whereHas('posts', function ($q) {
+                $q->has('questions', '>=', 2)->has('results', '>=', 3);
+            })->limit(3)->orderBy('name')->get();
+
+            $view->with('categories', $categories);
         });
     }
 }
