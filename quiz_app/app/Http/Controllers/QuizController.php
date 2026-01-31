@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
-    public function submit(Request $request)
+    public function submit(Request $request, Post $post)
     {
         $request->validate([
             'answers' => 'required|array',
             'post_id' => 'required|integer',
-        ]);
+        ]); 
 
         $postId = $request->post_id;
         $total = array_sum($request->answers);
-
+        // $post = Post::where('id', $postId);
         Post::where('id', $postId)->increment('attempts_count');
 
         session([
@@ -24,6 +24,6 @@ class QuizController extends Controller
             'post_id' => $postId,
         ]);
 
-        return redirect()->route('quiz.result');
+        return redirect()->route('quiz.result', $post->slug);
     }
 }
