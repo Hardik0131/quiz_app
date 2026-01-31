@@ -69,7 +69,7 @@ class PostController extends Controller
             'desc' => $request->desc,
         ]);
 
-        return back()->with('success', 'Post Create Succesfully.');
+        return redirect()->route('admin.post.display')->with('success', 'Post Create Succesfully.');
     }
 
     public function displayPost(Request $request)
