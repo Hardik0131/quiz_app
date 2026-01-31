@@ -91,7 +91,7 @@ class QuestionController extends Controller
             'desc' => $request->desc,
         ]);
 
-        return back()->with('success', 'Question Created Succesfully.');
+        return redirect()->route('admin.question.display')->with('success', 'Question Created Succesfully.');
     }
 
     /**
