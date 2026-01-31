@@ -16,9 +16,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::all();
-        $posts = Post::with('category')->get();
-        return view('front.home', compact('posts', 'categorys'));
+        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q){
+            $q->has('questions', '>=', 2)->has('results', '>=', 3);
+        })->get();
+        $posts = Post::with(['category', 'questions'])->has('questions', '>=', 2)->orderByDesc('post_name')->limit(10)->get();
+        $trending_posts = Post::orderByDesc('attempts_count')->has('questions', '>=', 2)->limit(5)->get();
+        
+        return view('front.home', compact('posts', 'trending_posts', 'categorys'));
     }
 
     /**
@@ -55,15 +59,18 @@ class CategoryController extends Controller
             'long_desc' => $request->long_desc,
         ]);
 
-        return back()->with('success', 'Category Create SuccesFully');
+        return redirect()->route('admin.category.display')->with('success', 'Category Create SuccesFully');
     }
 
     public function categoryPost(Category $category)
     {
-        $categories = Category::all();
+        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q){
+            $q->has('questions', '>=', 2)->has('results', '>=', 3);
+        })->get();
         $category = Category::where('name', $category->name)->firstOrFail();
-        $posts = Post::with('category')->where('category_id', $category->id)->get();
-        return view('front.home', compact('categories', 'posts', 'category'));
+        $posts = Post::with('category')->has('questions', '>=', 2)->has('results', '>=', 3)->where('category_id', $category->id)->get();
+        $trending_posts = Post::orderBy('attempts_count', 'desc')->has('questions', '>=', 2)->has('results', '>=', 3)->limit(5)->get();
+        return view('front.home', compact('posts', 'trending_posts', 'category', 'categorys'));
     }
 
     public function postQuestion(Category $category, Post $post)
@@ -72,10 +79,24 @@ class CategoryController extends Controller
             abort(404);
         }
 
+        $trending_posts = Post::where('attempts_count', 'desc')->limit(5)->get();
         $posts = Post::where('category_id', $category->id)->get();
-        $questions = $post->questions()->get();
+        $questions = $post->questions()->get()->map(function ($question) {
+            $options = [
+                ['text' => $question->option_a, 'value' => $question->a_val],
+                ['text' => $question->option_b, 'value' => $question->a_val],
+                ['text' => $question->option_c, 'value' => $question->c_val],
+                ['text' => $question->option_d, 'value' => $question->d_val],
+            ];
 
-        return view('front.quiz', compact('category', 'posts', 'post', 'questions'));
+            shuffle($options);
+
+            $question->shuffled_options = $options;
+
+            return $question;
+        });
+
+        return view('front.quiz', compact('category', 'trending_posts', 'post', 'questions', 'posts'));
     }
     
     // Admin Controller
