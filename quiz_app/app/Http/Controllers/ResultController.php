@@ -9,23 +9,27 @@ use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Pcntl\QosClass;
+// use Pcntl\QosClass;
 
 class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function result()
+
+    public function result(Post $post)
     {
         if (!session()->has('total_score') || !session()->has('post_id')) {
             abort(404);
         }
 
-        
-
+        $categories = Category::orderByRaw('CHAR_LENGTH(name) DESC')->whereHas('posts', function ($q) {
+            $q->has('questions', '>=', 2)->has('results', '>=', 3);
+        })->get();
+        $trending_posts = Post::orderBy('attempts_count', 'desc')->limit(5)->get();
         $score = session('total_score');
         $postId = session('post_id');
+        $posts = Post::inRandomOrder()->limit(9)->get();
 
         $post = Post::with('results')->findOrFail($postId);
 
@@ -34,7 +38,7 @@ class ResultController extends Controller
             ->where('max_score', '>=', $score)
             ->first();
 
-        return view('front/result', compact('score', 'post', 'result'));
+        return view('front.result', compact('trending_posts', 'score', 'post', 'result', 'posts', 'categories'));
     }
 
     /**
@@ -109,7 +113,7 @@ class ResultController extends Controller
             'desc' => $request->desc,
         ]);
 
-        return back()->with('success', 'Score Added Succesfully.');
+        return redirect()->route('admin.result.display')->with('success', 'Score Added Succesfully.');
     }
 
     /**
@@ -203,19 +207,19 @@ class ResultController extends Controller
         $post = Post::find($request->post_id);
         $Q = $post->questions()->count();
 
-        switch ($request->level){
-                case 'low' : 
-                    $minScore = $Q;
-                    $maxScore = 2 * $Q;
-                    break;
-                case 'medium' : 
-                    $minScore = (2 * $Q) + 1;
-                    $maxScore = 3 * $Q;
-                    break;
-                case 'hard' : 
-                    $minScore = (3 * $Q) + 1;
-                    $maxScore = 4 * $Q;
-                    break;
+        switch ($request->level) {
+            case 'low':
+                $minScore = $Q;
+                $maxScore = 2 * $Q;
+                break;
+            case 'medium':
+                $minScore = (2 * $Q) + 1;
+                $maxScore = 3 * $Q;
+                break;
+            case 'hard':
+                $minScore = (3 * $Q) + 1;
+                $maxScore = 4 * $Q;
+                break;
         }
 
         if ($Q === 0) {
@@ -252,14 +256,14 @@ class ResultController extends Controller
     {
         $result = Result::findOrFail($id);
 
-        try{
+        try {
             $result->delete();
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Result delete Successfully',
             ]);
-        } catch (\Throwable $e){
+        } catch (\Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
