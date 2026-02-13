@@ -16,13 +16,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q){
+        $categories = Category::orderByRaw('CHAR_LENGTH(name) DESC')->whereHas('posts', function ($q) {
+            $q->has('questions', '>=', 2)->has('results', '>=', 3);
+        })->get();
+        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q) {
             $q->has('questions', '>=', 2)->has('results', '>=', 3);
         })->get();
         $posts = Post::with(['category', 'questions'])->has('questions', '>=', 2)->orderByDesc('post_name')->limit(10)->get();
         $trending_posts = Post::orderByDesc('attempts_count')->has('questions', '>=', 2)->limit(5)->get();
-        
-        return view('front.home', compact('posts', 'trending_posts', 'categorys'));
+
+        return view('front.home', compact('posts', 'trending_posts', 'categorys', 'categories'));
     }
 
     /**
@@ -64,7 +67,7 @@ class CategoryController extends Controller
 
     public function categoryPost(Category $category)
     {
-        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q){
+        $categorys = Category::limit(3)->orderBy('name', 'asc')->whereHas('posts', function ($q) {
             $q->has('questions', '>=', 2)->has('results', '>=', 3);
         })->get();
         $category = Category::where('name', $category->name)->firstOrFail();
