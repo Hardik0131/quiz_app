@@ -33,7 +33,7 @@
 }
 
 #questionTable {
-    padding-top: 50px;
+    padding-top: 10px;
     border: none;
 }
 
@@ -148,61 +148,6 @@ td.action_btn {
 .table_cell img {
     object-fit: cover;
     height: 100px;
-}
-
-/* Filter Bar */
-
-.filter-bar {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 20px;
-    gap: 10px;
-    align-items: center;
-}
-
-.category_select,
-.post_select,
-.question_select {
-    width: 23%;
-}
-
-.filter-select-wrapper {
-    border: 1px solid #928e8e;
-    padding: 5px 10px;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.filter-select-wrapper select {
-    width: 100%;
-}
-
-.filter-select-wrapper select:focus {
-    outline: none;
-}
-
-.filter-bar .btn {
-    align-self: center;
-}
-
-.filter-bar .btn button {
-    align-self: center;
-    color: #fff;
-    background-color: #1367ff;
-    padding: 8px 15px;
-    border: 1px solid #c3ced6;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
-.filter-bar .btn button:hover {
-    transform: translateY(-2px);
-    padding: 10px 17px;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* search input */

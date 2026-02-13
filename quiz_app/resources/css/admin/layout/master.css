@@ -2,9 +2,11 @@
 
 .sub-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
     color: #11101d;
     padding: 18px 0;
+    gap: 35px;
 }
 
 .sub-nav .text {
@@ -14,7 +16,7 @@
 
 .search-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .search-bar .search-box {
@@ -93,7 +95,7 @@
 }
 
 .table tbody td .table_cell {
-    
+
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -382,4 +384,59 @@
 .ri-close-line {
     font-size: 19px;
     cursor: pointer;
+}
+
+
+/* Filter Bar */
+
+.filter-bar {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 20px;
+    gap: 15px;
+    align-items: center;
+}
+
+.category_select,
+.post_select,
+.question_select {
+    width: 23%;
+}
+
+.filter-select-wrapper {
+    border: 1px solid #928e8e;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.filter-select-wrapper select {
+    width: 100%;
+}
+
+.filter-select-wrapper select:focus {
+    outline: none;
+}
+
+.filter-bar .btn {
+    align-self: center;
+}
+
+.filter-bar .btn button {
+    align-self: center;
+    color: #fff;
+    background-color: #1367ff;
+    padding: 8px 15px;
+    border: 1px solid #c3ced6;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.filter-bar .btn button:hover {
+    transform: translateY(-2px);
+    transition: all 0.5s ease;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
