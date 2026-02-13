@@ -37,8 +37,24 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::whereHas('posts', function ($q) {
                 $q->has('questions', '>=', 2)->has('results', '>=', 3);
             })->limit(3)->orderBy('name')->get();
+            $morecategories = Category::orderByRaw('CHAR_LENGTH(name) DESC')->whereHas('posts', function ($q) {
+                $q->has('questions', '>=', 2)->has('results', '>=', 3);
+            })->get();
 
-            $view->with('categories', $categories);
+            $view->with([
+                'categories' => $categories,
+                'morecategories' => $morecategories,
+            ]);
+        });
+
+        View::composer('front.home', function ($view) {
+            $morecategories = Category::orderByRaw('CHAR_LENGTH(name) DESC')->whereHas('posts', function ($q) {
+                $q->has('questions', '>=', 2)->has('results', '>=', 3);
+            })->get();
+
+            $view->with([
+                'morecategories' => $morecategories,
+            ]);
         });
     }
 }
